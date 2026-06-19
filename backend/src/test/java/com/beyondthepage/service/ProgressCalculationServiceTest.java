@@ -85,7 +85,7 @@ class ProgressCalculationServiceTest {
 
 		double expected = progressCalculationService.computeExpectedPagesByDate(book, referenceDate);
 
-		assertEquals(100.0, expected);
+		assertEquals(110.0, expected);
 	}
 
 	@Test

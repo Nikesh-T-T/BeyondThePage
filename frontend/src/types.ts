@@ -64,6 +64,7 @@ export interface WeeklyDashboard {
 
 export interface DailyBookProgress {
   bookName: string;
+  totalPages: number;
   plannedPagesByDate: number;
   completedPages: number;
   variancePages: number;

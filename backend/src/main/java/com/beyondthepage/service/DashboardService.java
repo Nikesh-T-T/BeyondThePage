@@ -180,6 +180,7 @@ public class DashboardService {
 
 					return DailyBookProgressResponse.builder()
 							.bookName(book.getBookName())
+							.totalPages(book.getTotalPages())
 							.plannedPagesByDate(expectedByDate)
 							.completedPages(completedPages)
 							.variancePages(variance)

@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" onSearch={q => { if (q) navigate(`/books?q=${encodeURIComponent(q)}`); }} />
 
       <div className="max-w-container-max mx-auto p-lg space-y-xl">
         {/* Summary Cards */}

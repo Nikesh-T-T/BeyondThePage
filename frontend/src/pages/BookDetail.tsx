@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBook, updateProgress, uploadCover } from '../api';
+import { getBook, uploadCover } from '../api';
 import { BookDetail, ChapterStatus } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
@@ -17,9 +17,6 @@ const BookDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const [book, setBook] = useState<BookDetail | null>(null);
   const [loading, setLoading] = useState(true);
-  const [showProgressModal, setShowProgressModal] = useState(false);
-  const [progressInput, setProgressInput] = useState('');
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [uploadingCover, setUploadingCover] = useState(false);
   const coverInputRef = useRef<HTMLInputElement>(null);
@@ -30,33 +27,10 @@ const BookDetailPage: React.FC = () => {
     getBook(decoded)
       .then(b => {
         setBook(b);
-        setProgressInput(String(b.completedPages));
       })
       .catch(() => navigate('/books'))
       .finally(() => setLoading(false));
   }, [decoded, navigate]);
-
-  const handleUpdateProgress = async () => {
-    if (!book) return;
-    const pages = parseInt(progressInput, 10);
-    if (isNaN(pages) || pages < 0 || pages > book.totalPages) {
-      setError(`Please enter a value between 0 and ${book.totalPages}`);
-      return;
-    }
-    setSaving(true);
-    setError('');
-    try {
-      await updateProgress(decoded, pages);
-      const updated = await getBook(decoded);
-      setBook(updated);
-      setProgressInput(String(updated.completedPages));
-      setShowProgressModal(false);
-    } catch {
-      setError('Failed to update progress. Please try again.');
-    } finally {
-      setSaving(false);
-    }
-  };
 
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -86,7 +60,7 @@ const BookDetailPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" onSearch={q => { if (q) navigate(`/books?q=${encodeURIComponent(q)}`); }} />
 
       <div className="max-w-container-max mx-auto p-lg md:p-xl space-y-xl">
         {/* Breadcrumb */}
@@ -130,14 +104,6 @@ const BookDetailPage: React.FC = () => {
                 <p className="text-body-md text-on-surface-variant">
                   Started {book.startDate} · Target {book.targetEndDate}
                 </p>
-              </div>
-              <div className="flex gap-sm">
-                <button
-                  onClick={() => setShowProgressModal(true)}
-                  className="bg-primary text-on-primary px-lg py-sm rounded-lg font-bold hover:opacity-90 transition-opacity shadow-sm"
-                >
-                  Update Progress
-                </button>
               </div>
             </div>
 
@@ -289,70 +255,6 @@ const BookDetailPage: React.FC = () => {
           </div>
         </section>
       </div>
-
-      {/* Progress Update Modal */}
-      {showProgressModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-md">
-          <div className="bg-surface-container-lowest rounded-xl shadow-2xl w-full max-w-md p-xl space-y-lg">
-            <div className="flex justify-between items-center">
-              <h3 className="text-h2 font-semibold">Update Progress</h3>
-              <button
-                onClick={() => setShowProgressModal(false)}
-                className="text-on-surface-variant hover:text-on-surface"
-              >
-                <span className="material-symbols-outlined">close</span>
-              </button>
-            </div>
-
-            <div>
-              <p className="text-body-sm text-on-surface-variant mb-md">
-                {book.bookName} · {book.totalPages} total pages
-              </p>
-              <label className="block font-label-caps text-label-caps text-on-surface-variant mb-xs">
-                COMPLETED PAGES
-              </label>
-              <input
-                type="number"
-                min={0}
-                max={book.totalPages}
-                value={progressInput}
-                onChange={e => setProgressInput(e.target.value)}
-                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-h2 font-bold text-primary focus:outline-none focus:ring-2 focus:ring-primary"
-                autoFocus
-              />
-              {error && <p className="text-error text-body-sm mt-xs">{error}</p>}
-            </div>
-
-            <div className="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full transition-all"
-                style={{
-                  width: `${Math.min(100, (parseInt(progressInput, 10) || 0) / book.totalPages * 100)}%`,
-                }}
-              />
-            </div>
-            <p className="text-body-sm text-on-surface-variant text-center">
-              {Math.round(Math.min(100, (parseInt(progressInput, 10) || 0) / book.totalPages * 100))}% complete
-            </p>
-
-            <div className="flex gap-sm">
-              <button
-                onClick={() => setShowProgressModal(false)}
-                className="flex-1 py-sm border border-outline-variant rounded-lg font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleUpdateProgress}
-                disabled={saving}
-                className="flex-1 py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity disabled:opacity-50"
-              >
-                {saving ? 'Saving…' : 'Save Progress'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

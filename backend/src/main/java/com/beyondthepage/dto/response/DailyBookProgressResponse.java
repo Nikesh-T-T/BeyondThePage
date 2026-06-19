@@ -9,6 +9,7 @@ import lombok.Getter;
 public class DailyBookProgressResponse {
 
 	private String bookName;
+	private int totalPages;
 	private double plannedPagesByDate;
 	private int completedPages;
 	private double variancePages;

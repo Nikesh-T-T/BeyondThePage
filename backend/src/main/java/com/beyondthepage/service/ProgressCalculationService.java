@@ -28,9 +28,12 @@ public class ProgressCalculationService {
 	}
 
 	public double computeExpectedPagesByDate(Book book, LocalDate referenceDate) {
-		long daysElapsed = computeDaysElapsed(book.getStartDate(), referenceDate);
+		if (referenceDate.isBefore(book.getStartDate())) {
+			return 0;
+		}
+		long daysElapsed = ChronoUnit.DAYS.between(book.getStartDate(), referenceDate);
 		double plannedDailyPages = computePlannedDailyPages(book.getTotalPages(), book.getPlannedDays());
-		return Math.min(plannedDailyPages * daysElapsed, book.getTotalPages());
+		return Math.min(plannedDailyPages * (daysElapsed + 1), book.getTotalPages());
 	}
 
 	public BookStatus resolveBookStatus(int completedPages, int totalPages,

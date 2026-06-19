@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDailyDashboard } from '../api';
+import { getDailyDashboard, updateProgress } from '../api';
 import { DailyBookProgress } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
@@ -20,6 +20,10 @@ const DailyView: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(todayDateStr);
   const [data, setData] = useState<DailyBookProgress[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalBook, setModalBook] = useState<DailyBookProgress | null>(null);
+  const [progressInput, setProgressInput] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [modalError, setModalError] = useState('');
   const navigate = useNavigate();
 
   const load = useCallback((date: string) => {
@@ -41,6 +45,38 @@ const DailyView: React.FC = () => {
     return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   };
 
+  const openModal = (book: DailyBookProgress, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalBook(book);
+    setProgressInput(String(book.completedPages));
+    setModalError('');
+  };
+
+  const closeModal = () => {
+    setModalBook(null);
+    setModalError('');
+  };
+
+  const handleSave = async () => {
+    if (!modalBook) return;
+    const pages = parseInt(progressInput, 10);
+    if (isNaN(pages) || pages < 0 || pages > modalBook.totalPages) {
+      setModalError(`Enter a value between 0 and ${modalBook.totalPages}`);
+      return;
+    }
+    setSaving(true);
+    setModalError('');
+    try {
+      await updateProgress(modalBook.bookName, pages);
+      closeModal();
+      load(currentDate);
+    } catch {
+      setModalError('Failed to update progress. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const activeBooks = data.filter(b => b.status !== 'COMPLETED' && b.status !== 'NOT_STARTED');
   const onTrack = data.filter(b => b.status === 'ON_TRACK' || b.status === 'AT_RISK').length;
   const totalBooks = activeBooks.length;
@@ -48,7 +84,7 @@ const DailyView: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" onSearch={q => { if (q) navigate(`/books?q=${encodeURIComponent(q)}`); }} />
 
       <div className="max-w-container-max mx-auto p-lg md:p-xl space-y-xl">
         {/* Header */}
@@ -95,7 +131,7 @@ const DailyView: React.FC = () => {
                 <h3 className="text-headline-lg-mobile font-semibold text-primary">Daily Reading List</h3>
                 {totalBooks > 0 && (
                   <div className="bg-surface-container-low px-md py-sm rounded-xl border border-outline-variant flex items-center gap-md">
-                    <div className="relative w-10 h-10 flex items-center justify-center">
+                    <div className="relative w-14 h-14 flex items-center justify-center">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 48 48">
                         <circle cx="24" cy="24" fill="transparent" r="18" stroke="#e5e3d7" strokeWidth="4" />
                         <circle
@@ -106,7 +142,7 @@ const DailyView: React.FC = () => {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <span className="absolute text-[10px] font-bold text-primary">{pct}%</span>
+                      <span className="absolute text-[9px] font-bold text-primary">{pct}%</span>
                     </div>
                     <div>
                       <p className="font-label-caps text-[10px] text-on-surface-variant">DAILY STATUS</p>
@@ -145,9 +181,7 @@ const DailyView: React.FC = () => {
 
                         <div className="flex-grow">
                           <div className="flex justify-between items-start mb-2">
-                            <div>
-                              <h3 className="text-[18px] font-bold text-primary leading-tight">{book.bookName}</h3>
-                            </div>
+                            <h3 className="text-[18px] font-bold text-primary leading-tight">{book.bookName}</h3>
                             <StatusBadge status={book.status} />
                           </div>
                           <div className="mt-md">
@@ -165,11 +199,17 @@ const DailyView: React.FC = () => {
                                 style={{ width: `${pctDone}%` }}
                               />
                             </div>
-                            <div className="mt-2 flex items-center gap-1">
+                            <div className="mt-2 flex items-center justify-between">
                               <span className={`text-[11px] font-semibold ${book.variancePages >= 0 ? 'text-secondary' : 'text-error'}`}>
-                                {book.variancePages >= 0 ? '+' : ''}{Math.round(book.variancePages)} pages
+                                {book.variancePages >= 0 ? '+' : ''}{Math.round(book.variancePages)} pages vs plan
                               </span>
-                              <span className="text-[11px] text-on-surface-variant">vs plan</span>
+                              <button
+                                onClick={e => openModal(book, e)}
+                                className="text-[11px] font-bold text-primary hover:underline flex items-center gap-1"
+                              >
+                                <span className="material-symbols-outlined text-[14px]">edit</span>
+                                Update
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -182,7 +222,6 @@ const DailyView: React.FC = () => {
 
             {/* Sidebar Stats */}
             <div className="col-span-12 lg:col-span-4 space-y-lg">
-              {/* Overview */}
               <div className="bg-primary-fixed text-on-primary-fixed p-lg rounded-xl shadow-lg">
                 <div className="flex justify-between items-center mb-md">
                   <h3 className="font-label-caps text-[11px] opacity-70 tracking-widest">TODAY'S OVERVIEW</h3>
@@ -210,6 +249,55 @@ const DailyView: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Progress Update Modal */}
+      {modalBook && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-md">
+          <div className="bg-surface-container-lowest rounded-xl shadow-2xl w-full max-w-md p-xl space-y-lg">
+            <div className="flex justify-between items-center">
+              <h3 className="text-h2 font-semibold">Update Progress</h3>
+              <button onClick={closeModal} className="text-on-surface-variant hover:text-on-surface">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+
+            <div>
+              <p className="text-body-sm text-on-surface-variant mb-md">
+                {modalBook.bookName} · {modalBook.totalPages} total pages
+              </p>
+              <label className="block font-label-caps text-label-caps text-on-surface-variant mb-xs">
+                COMPLETED PAGES
+              </label>
+              <input
+                type="number"
+                min={0}
+                max={modalBook.totalPages}
+                value={progressInput}
+                onChange={e => setProgressInput(e.target.value)}
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-h2 font-bold text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                autoFocus
+              />
+              {modalError && <p className="text-error text-body-sm mt-xs">{modalError}</p>}
+            </div>
+
+            <div className="flex gap-sm">
+              <button
+                onClick={closeModal}
+                className="flex-1 py-sm border border-outline-variant rounded-lg font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="flex-1 py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {saving ? 'Saving…' : 'Save Progress'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

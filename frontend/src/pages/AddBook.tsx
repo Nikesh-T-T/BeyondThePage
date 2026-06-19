@@ -80,7 +80,7 @@ const AddBook: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" onSearch={q => { if (q) navigate(`/books?q=${encodeURIComponent(q)}`); }} />
 
       <div className="max-w-[720px] mx-auto p-lg md:p-xl space-y-xl">
         <div className="flex items-center gap-md">

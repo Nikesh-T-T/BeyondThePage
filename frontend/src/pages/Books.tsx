@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getBooks } from '../api';
 import { BookSummary } from '../types';
 import TopBar from '../components/TopBar';
@@ -8,14 +8,22 @@ import StatusBadge from '../components/StatusBadge';
 const Books: React.FC = () => {
   const [books, setBooks] = useState<BookSummary[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchInput, setSearchInput] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchInput, setSearchInput] = useState(() => searchParams.get('q') ?? '');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') ?? '');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => setSearchQuery(searchInput), 300);
+    const timer = setTimeout(() => {
+      setSearchQuery(searchInput);
+      if (searchInput) {
+        setSearchParams({ q: searchInput }, { replace: true });
+      } else {
+        setSearchParams({}, { replace: true });
+      }
+    }, 300);
     return () => clearTimeout(timer);
-  }, [searchInput]);
+  }, [searchInput, setSearchParams]);
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +42,7 @@ const Books: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" searchValue={searchInput} onSearch={setSearchInput} />
+      <TopBar title="Beyond The Page" searchValue={searchInput} onSearch={setSearchInput} autoFocusSearch={!!searchParams.get('q')} />
 
       <div className="max-w-container-max mx-auto p-lg space-y-xl">
         <div className="flex justify-between items-center">

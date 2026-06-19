@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getWeeklyDashboard } from '../api';
 import { WeeklyDashboard } from '../types';
 import TopBar from '../components/TopBar';
@@ -20,6 +21,7 @@ const formatDisplay = (dateStr: string) => {
 };
 
 const WeeklyView: React.FC = () => {
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(todayStr);
   const [data, setData] = useState<WeeklyDashboard | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +51,7 @@ const WeeklyView: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" onSearch={q => { if (q) navigate(`/books?q=${encodeURIComponent(q)}`); }} />
 
       <div className="max-w-container-max mx-auto p-lg md:p-xl space-y-xl">
         {/* Header */}
