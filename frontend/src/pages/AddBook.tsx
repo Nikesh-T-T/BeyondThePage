@@ -183,14 +183,6 @@ const AddBook: React.FC = () => {
           <div className="card p-lg space-y-md">
             <div className="flex justify-between items-center">
               <h3 className="text-h2 font-semibold">Chapters</h3>
-              <button
-                type="button"
-                onClick={addChapter}
-                className="flex items-center gap-xs text-primary font-label-caps text-label-caps hover:underline"
-              >
-                <span className="material-symbols-outlined text-[18px]">add</span>
-                ADD CHAPTER
-              </button>
             </div>
 
             <p className="text-body-sm text-on-surface-variant">
@@ -251,6 +243,15 @@ const AddBook: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            <button
+              type="button"
+              onClick={addChapter}
+              className="flex items-center gap-xs text-primary font-label-caps text-label-caps hover:underline"
+            >
+              <span className="material-symbols-outlined text-[18px]">add</span>
+              ADD CHAPTER
+            </button>
           </div>
 
           {error && (
