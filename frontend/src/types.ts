@@ -11,6 +11,7 @@ export interface ChapterDetail {
 
 export interface BookSummary {
   bookName: string;
+  category?: string;
   totalPages: number;
   plannedDays: number;
   startDate: string;
@@ -74,6 +75,7 @@ export interface DailyBookProgress {
 
 export interface CreateBookRequest {
   bookName: string;
+  category?: string;
   totalPages: number;
   plannedDays: number;
   startDate: string;

@@ -13,6 +13,7 @@ interface ChapterRow {
 const AddBook: React.FC = () => {
   const navigate = useNavigate();
   const [bookName, setBookName] = useState('');
+  const [category, setCategory] = useState('');
   const [totalPages, setTotalPages] = useState('');
   const [plannedDays, setPlannedDays] = useState('');
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
@@ -58,6 +59,7 @@ const AddBook: React.FC = () => {
     try {
       const created = await createBook({
         bookName,
+        category: category || undefined,
         totalPages: parseInt(totalPages, 10),
         plannedDays: parseInt(plannedDays, 10),
         startDate,
@@ -106,6 +108,17 @@ const AddBook: React.FC = () => {
                 value={bookName}
                 onChange={e => setBookName(e.target.value)}
                 placeholder="e.g. Clean Code"
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+
+            <div className="space-y-xs">
+              <label className="block font-label-caps text-label-caps text-on-surface-variant">CATEGORY <span className="normal-case text-[10px]">(optional)</span></label>
+              <input
+                type="text"
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+                placeholder="e.g. Technology, Fiction, Self-Help"
                 className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>

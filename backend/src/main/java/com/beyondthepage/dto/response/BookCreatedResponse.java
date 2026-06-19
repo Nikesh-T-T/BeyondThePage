@@ -9,6 +9,7 @@ import lombok.Getter;
 public class BookCreatedResponse {
 
 	private String bookName;
+	private String category;
 	private int totalPages;
 	private int plannedDays;
 	private LocalDate startDate;

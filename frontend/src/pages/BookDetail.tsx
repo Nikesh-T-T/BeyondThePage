@@ -103,6 +103,7 @@ const BookDetailPage: React.FC = () => {
               <div>
                 <h1 className="text-h1 font-bold leading-none mb-3">{book.bookName}</h1>
                 <p className="text-body-md text-on-surface-variant">
+                  {book.category && <span className="mr-2">{book.category} ·</span>}
                   Started {book.startDate} · Target {book.targetEndDate}
                 </p>
               </div>
