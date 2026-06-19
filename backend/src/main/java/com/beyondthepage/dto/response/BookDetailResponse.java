@@ -11,6 +11,7 @@ import lombok.Getter;
 public class BookDetailResponse {
 
 	private String bookName;
+	private String category;
 	private int totalPages;
 	private int plannedDays;
 	private LocalDate startDate;

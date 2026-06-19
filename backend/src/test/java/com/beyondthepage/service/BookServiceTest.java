@@ -2,6 +2,7 @@ package com.beyondthepage.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -80,6 +81,33 @@ class BookServiceTest {
 		verify(readingProgressRepository).save(any(ReadingProgress.class));
 	}
 
+	@Test
+	void shouldCreateBookWithCategorySuccessfully() {
+		CreateBookRequest request = createBookRequestWithTwoChapters();
+		setField(request, "category", "Technology");
+		Book savedBook = createBook(100, 30, START_DATE);
+		savedBook.setCategory("Technology");
+		when(bookRepository.existsByBookName("Test Book")).thenReturn(false);
+		when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
+		when(readingProgressRepository.save(any(ReadingProgress.class))).thenReturn(new ReadingProgress(savedBook));
+
+		BookCreatedResponse response = bookService.createBook(request);
+
+		assertEquals("Technology", response.getCategory());
+	}
+
+	@Test
+	void shouldCreateBookWithoutCategoryWhenCategoryIsNull() {
+		CreateBookRequest request = createBookRequestWithTwoChapters();
+		Book savedBook = createBook(100, 30, START_DATE);
+		when(bookRepository.existsByBookName("Test Book")).thenReturn(false);
+		when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
+		when(readingProgressRepository.save(any(ReadingProgress.class))).thenReturn(new ReadingProgress(savedBook));
+
+		BookCreatedResponse response = bookService.createBook(request);
+
+		assertNull(response.getCategory());
+	}
 	@Test
 	void shouldThrowBookAlreadyExistsExceptionWhenBookNameIsDuplicate() {
 		CreateBookRequest request = createBookRequestWithTwoChapters();

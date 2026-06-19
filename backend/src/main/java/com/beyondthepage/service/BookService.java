@@ -53,6 +53,7 @@ public class BookService {
 
 		Book book = new Book(request.getBookName(), request.getTotalPages(),
 				request.getPlannedDays(), request.getStartDate());
+		book.setCategory(request.getCategory());
 
 		List<ChapterRequest> sortedChapters = request.getChapters()
 				.stream()
@@ -71,6 +72,7 @@ public class BookService {
 
 		return BookCreatedResponse.builder()
 				.bookName(saved.getBookName())
+				.category(saved.getCategory())
 				.totalPages(saved.getTotalPages())
 				.plannedDays(saved.getPlannedDays())
 				.startDate(saved.getStartDate())
@@ -135,6 +137,7 @@ public class BookService {
 
 		return BookDetailResponse.builder()
 				.bookName(book.getBookName())
+				.category(book.getCategory())
 				.totalPages(book.getTotalPages())
 				.plannedDays(book.getPlannedDays())
 				.startDate(book.getStartDate())
@@ -189,6 +192,7 @@ public class BookService {
 
 		return BookSummaryResponse.builder()
 				.bookName(book.getBookName())
+				.category(book.getCategory())
 				.totalPages(book.getTotalPages())
 				.plannedDays(book.getPlannedDays())
 				.startDate(book.getStartDate())

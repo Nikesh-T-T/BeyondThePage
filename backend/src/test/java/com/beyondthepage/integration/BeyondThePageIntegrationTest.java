@@ -74,6 +74,54 @@ class BeyondThePageIntegrationTest {
 	}
 
 	@Test
+	void shouldCreateBookWithCategoryAndReturnItInResponses() throws Exception {
+		mockMvc.perform(post("/api/books")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+						{
+						  "bookName": "Domain-Driven Design",
+						  "category": "Technology",
+						  "totalPages": 150,
+						  "plannedDays": 15,
+						  "startDate": "2026-07-01",
+						  "chapters": [
+						    { "chapterNumber": 1, "chapterTitle": "Chapter 1", "startPage": 1, "endPage": 150 }
+						  ]
+						}
+						"""))
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.data.category", is("Technology")));
+
+		mockMvc.perform(get("/api/books/Domain-Driven Design"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data.category", is("Technology")));
+
+		mockMvc.perform(get("/api/books"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data[?(@.bookName == 'Domain-Driven Design')].category",
+						org.hamcrest.Matchers.hasItem("Technology")));
+	}
+
+	@Test
+	void shouldCreateBookWithoutCategoryWhenOmitted() throws Exception {
+		mockMvc.perform(post("/api/books")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+						{
+						  "bookName": "Refactoring",
+						  "totalPages": 200,
+						  "plannedDays": 20,
+						  "startDate": "2026-07-01",
+						  "chapters": [
+						    { "chapterNumber": 1, "chapterTitle": "Chapter 1", "startPage": 1, "endPage": 200 }
+						  ]
+						}
+						"""))
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.data.category").doesNotExist());
+	}
+
+	@Test
 	void shouldReturn409WhenCreatingBookWithDuplicateName() throws Exception {
 		mockMvc.perform(post("/api/books")
 				.contentType(MediaType.APPLICATION_JSON)

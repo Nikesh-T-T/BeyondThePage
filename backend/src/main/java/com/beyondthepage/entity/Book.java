@@ -36,6 +36,9 @@ public class Book {
 	@Column(name = "start_date", nullable = false)
 	private LocalDate startDate;
 
+	@Column(name = "category", length = 100)
+	private String category;
+
 	@Column(name = "cover_image", columnDefinition = "bytea")
 	private byte[] coverImage;
 
