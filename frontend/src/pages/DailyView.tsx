@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDailyDashboard, updateProgress } from '../api';
+import { getDailyDashboard, updateProgress, coverUrl } from '../api';
 import { DailyBookProgress } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
@@ -173,7 +173,7 @@ const DailyView: React.FC = () => {
                       >
                         <div className="flex-shrink-0 w-16 h-20 rounded bg-surface-container-high overflow-hidden flex items-center justify-center">
                           {book.hasCoverImage
-                            ? <img src={`/api/books/${encodeURIComponent(book.bookName)}/cover`}
+                            ? <img src={coverUrl(book.bookName)}
                                    alt={`${book.bookName} cover`}
                                    className="w-full h-full object-cover" />
                             : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
