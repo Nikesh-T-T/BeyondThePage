@@ -117,7 +117,7 @@ Schema is managed by Flyway (`V1__init.sql`, `V2__add_cover_image.sql`). The app
 | `total_pages` | `INT` | NOT NULL, > 0 |
 | `planned_days` | `INT` | NOT NULL, > 0 |
 | `start_date` | `DATE` | NOT NULL |
-| `cover_image` | `BINARY LARGE OBJECT` | NULL |
+| `cover_image` | `BYTEA` | NULL |
 | `cover_image_type` | `VARCHAR(50)` | NULL |
 
 ### `book_chapters`
