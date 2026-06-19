@@ -60,7 +60,7 @@ REACT_APP_API_BASE_URL=https://your-backend.onrender.com/api
 |---------|-------|
 | Root Directory | `frontend` |
 | Build Command | `npm install && npm run build` |
-| Publish Directory | `dist` |
+| Publish Directory | `build` |
 
 #### SPA Routing
 

@@ -95,6 +95,7 @@ const BookDetailPage: React.FC = () => {
                 : <span className="material-symbols-outlined text-[16px]">upload</span>}
               <span>{uploadingCover ? 'Uploading…' : book.hasCoverImage ? 'Replace Cover' : 'Upload Cover'}</span>
             </label>
+            {error && <p className="text-error text-body-sm text-center max-w-[200px]">{error}</p>}
           </div>
 
           <div className="lg:col-span-9 space-y-lg">
