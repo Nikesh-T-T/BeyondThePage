@@ -13,6 +13,9 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL ?? '/api',
 });
 
+export const coverUrl = (bookName: string) =>
+  `${process.env.REACT_APP_API_BASE_URL ?? '/api'}/books/${encodeURIComponent(bookName)}/cover`;
+
 interface ApiResponse<T> {
   status: string;
   message: string;

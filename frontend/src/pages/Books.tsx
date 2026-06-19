@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getBooks } from '../api';
+import { getBooks, coverUrl } from '../api';
 import { BookSummary } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
@@ -87,7 +87,7 @@ const Books: React.FC = () => {
               >
                 <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
                   {book.hasCoverImage
-                    ? <img src={`/api/books/${encodeURIComponent(book.bookName)}/cover`}
+                    ? <img src={coverUrl(book.bookName)}
                            alt={`${book.bookName} cover`}
                            className="w-full h-full object-cover" />
                     : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
