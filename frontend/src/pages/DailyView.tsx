@@ -5,8 +5,19 @@ import { DailyBookProgress } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
 
+const todayDateStr = () => {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+};
+
+const shiftDate = (dateStr: string, days: number) => {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d + days);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+};
+
 const DailyView: React.FC = () => {
-  const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0]);
+  const [currentDate, setCurrentDate] = useState(todayDateStr);
   const [data, setData] = useState<DailyBookProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -22,25 +33,17 @@ const DailyView: React.FC = () => {
     load(currentDate);
   }, [currentDate, load]);
 
-  const goToPrev = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() - 1);
-    setCurrentDate(d.toISOString().split('T')[0]);
-  };
-
-  const goToNext = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + 1);
-    setCurrentDate(d.toISOString().split('T')[0]);
-  };
+  const goToPrev = () => setCurrentDate(shiftDate(currentDate, -1));
+  const goToNext = () => setCurrentDate(shiftDate(currentDate, 1));
 
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr + 'T00:00:00');
     return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   };
 
-  const onTrack = data.filter(b => b.status === 'ON_TRACK' || b.status === 'COMPLETED').length;
-  const totalBooks = data.length;
+  const activeBooks = data.filter(b => b.status !== 'COMPLETED' && b.status !== 'NOT_STARTED');
+  const onTrack = data.filter(b => b.status === 'ON_TRACK' || b.status === 'AT_RISK').length;
+  const totalBooks = activeBooks.length;
   const pct = totalBooks > 0 ? Math.round((onTrack / totalBooks) * 100) : 0;
 
   return (
@@ -61,11 +64,14 @@ const DailyView: React.FC = () => {
             >
               <span className="material-symbols-outlined">chevron_left</span>
             </button>
+            <div className="bg-surface-container-lowest border border-outline-variant px-lg py-sm rounded-lg flex items-center gap-2 min-w-[200px] justify-center">
+              <span className="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_today</span>
+              <span className="text-body-sm font-semibold text-on-surface">{formatDate(currentDate)}</span>
+            </div>
             <button
-              onClick={() => setCurrentDate(new Date().toISOString().split('T')[0])}
+              onClick={() => setCurrentDate(todayDateStr())}
               className="bg-surface-container-lowest border border-outline-variant px-md py-sm rounded-lg font-bold text-on-surface-variant hover:border-primary transition-colors flex items-center gap-2"
             >
-              <span className="material-symbols-outlined text-[18px]">calendar_today</span>
               <span className="text-body-sm">Today</span>
             </button>
             <button
@@ -130,7 +136,11 @@ const DailyView: React.FC = () => {
                         onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
                       >
                         <div className="flex-shrink-0 w-16 h-20 rounded bg-surface-container-high overflow-hidden flex items-center justify-center">
-                          <span className="material-symbols-outlined text-on-surface-variant">book</span>
+                          {book.hasCoverImage
+                            ? <img src={`/api/books/${encodeURIComponent(book.bookName)}/cover`}
+                                   alt={`${book.bookName} cover`}
+                                   className="w-full h-full object-cover" />
+                            : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
                         </div>
 
                         <div className="flex-grow">
@@ -173,44 +183,29 @@ const DailyView: React.FC = () => {
             {/* Sidebar Stats */}
             <div className="col-span-12 lg:col-span-4 space-y-lg">
               {/* Overview */}
-              <div className="bg-secondary text-on-primary p-lg rounded-xl shadow-lg">
+              <div className="bg-primary-fixed text-on-primary-fixed p-lg rounded-xl shadow-lg">
                 <div className="flex justify-between items-center mb-md">
-                  <h3 className="font-label-caps text-[11px] text-on-primary/70 tracking-widest">TODAY'S OVERVIEW</h3>
-                  <span className="material-symbols-outlined text-[20px] text-on-primary/60">trending_up</span>
+                  <h3 className="font-label-caps text-[11px] opacity-70 tracking-widest">TODAY'S OVERVIEW</h3>
+                  <span className="material-symbols-outlined text-[20px] opacity-60">trending_up</span>
                 </div>
                 <div className="flex items-baseline gap-2 mb-sm">
                   <span className="text-headline-xl font-bold leading-none">{totalBooks}</span>
-                  <span className="text-[16px] font-medium text-on-primary/70">active books</span>
+                  <span className="text-[16px] font-medium opacity-70">active books</span>
                 </div>
-                <div className="w-full h-2 bg-white/10 rounded-full mb-lg border border-white/5">
-                  <div className="h-full bg-white rounded-full" style={{ width: `${pct}%` }} />
+                <div className="w-full h-2 bg-on-primary-fixed/15 rounded-full mb-lg">
+                  <div className="h-full bg-on-primary-fixed rounded-full" style={{ width: `${pct}%` }} />
                 </div>
                 <div className="grid grid-cols-2 gap-md">
-                  <div className="bg-white/5 p-md rounded-lg border border-white/5">
-                    <p className="text-[10px] font-bold text-on-primary/50 mb-1 uppercase">On Track</p>
+                  <div className="bg-on-primary-fixed/10 p-md rounded-lg border border-on-primary-fixed/10">
+                    <p className="text-[10px] font-bold opacity-60 mb-1 uppercase">On Track</p>
                     <p className="text-[22px] font-bold">{onTrack}</p>
                   </div>
-                  <div className="bg-white/5 p-md rounded-lg border border-white/5">
-                    <p className="text-[10px] font-bold text-on-primary/50 mb-1 uppercase">Overdue</p>
+                  <div className="bg-on-primary-fixed/10 p-md rounded-lg border border-on-primary-fixed/10">
+                    <p className="text-[10px] font-bold opacity-60 mb-1 uppercase">Overdue</p>
                     <p className="text-[22px] font-bold">{data.filter(b => b.status === 'OVERDUE').length}</p>
                   </div>
                 </div>
               </div>
-
-              {/* Variance Summary */}
-              {data.length > 0 && (
-                <div className="card p-lg space-y-md">
-                  <h4 className="text-h2 font-semibold">Variance Summary</h4>
-                  {data.map(book => (
-                    <div key={book.bookName} className="flex justify-between items-center">
-                      <span className="text-body-sm text-on-surface truncate max-w-[60%]">{book.bookName}</span>
-                      <span className={`text-body-sm font-bold ${book.variancePages >= 0 ? 'text-primary' : 'text-error'}`}>
-                        {book.variancePages >= 0 ? '+' : ''}{Math.round(book.variancePages)}p
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         )}

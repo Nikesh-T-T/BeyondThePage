@@ -14,6 +14,9 @@ public interface BookRepository extends JpaRepository<Book, String> {
 	@Query("SELECT b FROM Book b JOIN FETCH b.readingProgress ORDER BY b.bookName ASC")
 	List<Book> findAllWithProgress();
 
+	@Query("SELECT b FROM Book b JOIN FETCH b.readingProgress WHERE LOWER(b.bookName) LIKE LOWER(CONCAT('%', :query, '%')) ORDER BY b.bookName ASC")
+	List<Book> findAllWithProgressByNameContaining(@Param("query") String query);
+
 	@Query("SELECT b FROM Book b JOIN FETCH b.readingProgress LEFT JOIN FETCH b.chapters WHERE b.bookName = :bookName")
 	Optional<Book> findByBookNameWithDetails(@Param("bookName") String bookName);
 }

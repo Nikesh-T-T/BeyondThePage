@@ -89,7 +89,8 @@ backend/
     │   └── resources/
     │       ├── application.properties
     │       └── db/migration/
-    │           └── V1__init.sql
+    │           ├── V1__init.sql
+    │           └── V2__add_cover_image.sql
     └── test/
         └── java/com/beyondthepage/
             ├── exception/
@@ -106,7 +107,7 @@ backend/
 
 ## Database Structure
 
-Schema is managed by Flyway (`V1__init.sql`). The application uses `ddl-auto=validate` — Hibernate validates against the schema but never modifies it.
+Schema is managed by Flyway (`V1__init.sql`, `V2__add_cover_image.sql`). The application uses `ddl-auto=validate` — Hibernate validates against the schema but never modifies it.
 
 ### `books`
 
@@ -116,6 +117,8 @@ Schema is managed by Flyway (`V1__init.sql`). The application uses `ddl-auto=val
 | `total_pages` | `INT` | NOT NULL, > 0 |
 | `planned_days` | `INT` | NOT NULL, > 0 |
 | `start_date` | `DATE` | NOT NULL |
+| `cover_image` | `BINARY LARGE OBJECT` | NULL |
+| `cover_image_type` | `VARCHAR(50)` | NULL |
 
 ### `book_chapters`
 
@@ -207,9 +210,27 @@ Chapter validation (service layer):
     "totalPages": 431,
     "plannedDays": 30,
     "startDate": "2026-07-01",
-    "completedPages": 0
+    "completedPages": 0,
+    "hasCoverImage": false
   }
 }
+```
+
+**curl example**
+```bash
+curl -X POST http://localhost:8080/api/books \
+  -H "Content-Type: application/json" \
+  -d '{
+    "bookName": "Clean Code",
+    "totalPages": 431,
+    "plannedDays": 30,
+    "startDate": "2026-07-01",
+    "chapters": [
+      {"chapterNumber": 1, "chapterTitle": "Clean Code",       "startPage": 1,   "endPage": 50 },
+      {"chapterNumber": 2, "chapterTitle": "Meaningful Names", "startPage": 51,  "endPage": 120},
+      {"chapterNumber": 3, "chapterTitle": "Functions",        "startPage": 121, "endPage": 431}
+    ]
+  }'
 ```
 
 ---
@@ -236,17 +257,23 @@ No request body or parameters.
       "targetEndDate": "2026-07-31",
       "currentStatus": "ON_TRACK",
       "daysElapsed": 10,
-      "daysRemaining": 20
+      "daysRemaining": 20,
+      "hasCoverImage": true
     }
   ]
 }
+```
+
+**curl example**
+```bash
+curl http://localhost:8080/api/books
 ```
 
 ---
 
 #### `GET /api/books/{bookName}` — Get book detail
 
-**Path parameter:** `bookName` — the book's name (URL-encoded if it contains spaces)
+**Path parameter:** `bookName` — URL-encoded if it contains spaces
 
 **Response — `200 OK`**
 ```json
@@ -271,6 +298,7 @@ No request body or parameters.
     "completedChapters": 2,
     "pendingChapters": 1,
     "overdueChapters": 0,
+    "hasCoverImage": true,
     "chapters": [
       { "chapterNumber": 1, "chapterTitle": "Clean Code",       "startPage": 1,   "endPage": 50,  "status": "COMPLETED"   },
       { "chapterNumber": 2, "chapterTitle": "Meaningful Names", "startPage": 51,  "endPage": 120, "status": "COMPLETED"   },
@@ -282,10 +310,12 @@ No request body or parameters.
 
 **Error — `404 Not Found`**
 ```json
-{
-  "status": "ERROR",
-  "message": "Book not found: Clean Code"
-}
+{ "status": "ERROR", "message": "Book not found: Clean Code" }
+```
+
+**curl example**
+```bash
+curl "http://localhost:8080/api/books/Clean%20Code"
 ```
 
 ---
@@ -296,9 +326,7 @@ No request body or parameters.
 
 **Request body**
 ```json
-{
-  "completedPages": 150
-}
+{ "completedPages": 150 }
 ```
 
 | Field | Type | Required | Validation |
@@ -313,6 +341,55 @@ No request body or parameters.
 |--------|-----------|
 | `400` | `completedPages` is negative or exceeds `totalPages` |
 | `404` | Book not found |
+
+**curl example**
+```bash
+curl -X PUT "http://localhost:8080/api/books/Clean%20Code/progress" \
+  -H "Content-Type: application/json" \
+  -d '{"completedPages": 150}'
+```
+
+---
+
+#### `PUT /api/books/{bookName}/cover` — Upload or replace book cover
+
+**Content-Type:** `multipart/form-data`
+
+| Part | Type | Required | Validation |
+|------|------|----------|------------|
+| `file` | image file | yes | JPEG, PNG, or WEBP; max 5 MB |
+
+**Response — `200 OK`**
+```json
+{ "status": "SUCCESS", "message": "Cover uploaded successfully", "data": null }
+```
+
+**Errors**
+
+| Status | Condition |
+|--------|-----------|
+| `400` | File missing, unsupported type, or exceeds 5 MB |
+| `404` | Book not found |
+
+**curl example**
+```bash
+curl -X PUT "http://localhost:8080/api/books/Clean%20Code/cover" \
+  -F "file=@/path/to/cover.jpg"
+```
+
+---
+
+#### `GET /api/books/{bookName}/cover` — Fetch cover image
+
+Returns raw image bytes with the correct `Content-Type` header (`image/jpeg`, `image/png`, or `image/webp`). Use directly as an `<img src>` URL.
+
+**Response — `200 OK`** binary image body  
+**Response — `404 Not Found`** if the book has no cover
+
+**curl example**
+```bash
+curl "http://localhost:8080/api/books/Clean%20Code/cover" --output cover.jpg
+```
 
 ---
 
@@ -338,6 +415,11 @@ No parameters.
 ```
 
 > `inProgressBooks` = `ON_TRACK` + `AT_RISK` books combined.
+
+**curl example**
+```bash
+curl http://localhost:8080/api/dashboard/summary
+```
 
 ---
 
@@ -365,6 +447,11 @@ No parameters.
 
 **Error — `400`** if `month` cannot be parsed as `yyyy-MM`.
 
+**curl example**
+```bash
+curl "http://localhost:8080/api/dashboard/monthly?month=2026-07"
+```
+
 ---
 
 #### `GET /api/dashboard/weekly?date={yyyy-MM-dd}` — Weekly chapter view
@@ -390,6 +477,11 @@ No parameters.
 ```
 
 **Error — `400`** if `date` cannot be parsed as `yyyy-MM-dd`.
+
+**curl example**
+```bash
+curl "http://localhost:8080/api/dashboard/weekly?date=2026-06-19"
+```
 
 ---
 
@@ -417,6 +509,11 @@ No parameters.
 > Returns one entry per book. `variancePages` is `completedPages - plannedPagesByDate` (negative means behind).
 
 **Error — `400`** if `date` cannot be parsed as `yyyy-MM-dd`.
+
+**curl example**
+```bash
+curl "http://localhost:8080/api/dashboard/daily?date=2026-06-19"
+```
 
 ---
 

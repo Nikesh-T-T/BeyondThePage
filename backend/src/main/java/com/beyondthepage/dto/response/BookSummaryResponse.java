@@ -21,4 +21,5 @@ public class BookSummaryResponse {
 	private BookStatus currentStatus;
 	private long daysElapsed;
 	private long daysRemaining;
+	private boolean hasCoverImage;
 }

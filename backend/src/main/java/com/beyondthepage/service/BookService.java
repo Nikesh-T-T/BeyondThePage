@@ -17,14 +17,20 @@ import com.beyondthepage.exception.BookNotFoundException;
 import com.beyondthepage.exception.InvalidChapterDataException;
 import com.beyondthepage.repository.BookRepository;
 import com.beyondthepage.repository.ReadingProgressRepository;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class BookService {
+
+	private static final Set<String> ALLOWED_IMAGE_TYPES = Set.of("image/jpeg", "image/png", "image/webp");
+	private static final long MAX_COVER_BYTES = 5 * 1024 * 1024L;
 
 	private final BookRepository bookRepository;
 	private final ReadingProgressRepository readingProgressRepository;
@@ -69,14 +75,17 @@ public class BookService {
 				.plannedDays(saved.getPlannedDays())
 				.startDate(saved.getStartDate())
 				.completedPages(0)
+				.hasCoverImage(false)
 				.build();
 	}
 
 	@Transactional(readOnly = true)
-	public List<BookSummaryResponse> getAllBooks() {
+	public List<BookSummaryResponse> getAllBooks(String query) {
 		LocalDate today = LocalDate.now();
-		return bookRepository.findAllWithProgress()
-				.stream()
+		List<Book> books = (query == null || query.isBlank())
+				? bookRepository.findAllWithProgress()
+				: bookRepository.findAllWithProgressByNameContaining(query);
+		return books.stream()
 				.map(book -> buildBookSummaryResponse(book, today))
 				.toList();
 	}
@@ -143,6 +152,7 @@ public class BookService {
 				.pendingChapters(pendingChapters)
 				.overdueChapters(overdueChapters)
 				.chapters(chapterResponses)
+				.hasCoverImage(book.getCoverImage() != null)
 				.build();
 	}
 
@@ -190,7 +200,37 @@ public class BookService {
 				.currentStatus(status)
 				.daysElapsed(daysElapsed)
 				.daysRemaining(daysRemaining)
+				.hasCoverImage(book.getCoverImage() != null)
 				.build();
+	}
+
+	@Transactional
+	public void uploadCover(String bookName, MultipartFile file) {
+		if (file.isEmpty()) {
+			throw new InvalidChapterDataException("Cover file must not be empty");
+		}
+		String contentType = file.getContentType();
+		if (contentType == null || !ALLOWED_IMAGE_TYPES.contains(contentType)) {
+			throw new InvalidChapterDataException("Unsupported type. Accepted: JPEG, PNG, WEBP");
+		}
+		if (file.getSize() > MAX_COVER_BYTES) {
+			throw new InvalidChapterDataException("Cover image must be 5 MB or smaller");
+		}
+		Book book = bookRepository.findById(bookName)
+				.orElseThrow(() -> new BookNotFoundException(bookName));
+		try {
+			book.setCoverImage(file.getBytes());
+		} catch (IOException e) {
+			throw new InvalidChapterDataException("Failed to read cover image");
+		}
+		book.setCoverImageType(contentType);
+		bookRepository.save(book);
+	}
+
+	@Transactional(readOnly = true)
+	public Book getBookWithCover(String bookName) {
+		return bookRepository.findById(bookName)
+				.orElseThrow(() -> new BookNotFoundException(bookName));
 	}
 
 	private void validateChapters(List<ChapterRequest> chapters, int totalPages) {

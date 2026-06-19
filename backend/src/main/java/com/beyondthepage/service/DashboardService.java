@@ -184,6 +184,7 @@ public class DashboardService {
 							.completedPages(completedPages)
 							.variancePages(variance)
 							.status(status)
+							.hasCoverImage(book.getCoverImage() != null)
 							.build();
 				})
 				.toList();

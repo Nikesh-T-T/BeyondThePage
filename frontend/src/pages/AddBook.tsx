@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createBook } from '../api';
+import { createBook, uploadCover } from '../api';
 import TopBar from '../components/TopBar';
 
 interface ChapterRow {
@@ -21,6 +21,18 @@ const AddBook: React.FC = () => {
   ]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => { if (coverPreview) URL.revokeObjectURL(coverPreview); };
+  }, [coverPreview]);
+
+  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    setCoverFile(file);
+    setCoverPreview(file ? URL.createObjectURL(file) : null);
+  };
 
   const addChapter = () => {
     const prev = chapters[chapters.length - 1];
@@ -44,7 +56,7 @@ const AddBook: React.FC = () => {
     setError('');
     setSaving(true);
     try {
-      await createBook({
+      const created = await createBook({
         bookName,
         totalPages: parseInt(totalPages, 10),
         plannedDays: parseInt(plannedDays, 10),
@@ -56,6 +68,7 @@ const AddBook: React.FC = () => {
           endPage: parseInt(ch.endPage, 10),
         })),
       });
+      if (coverFile) await uploadCover(created.bookName, coverFile);
       navigate('/books');
     } catch (err: any) {
       const msg = err?.response?.data?.message ?? 'Failed to create book. Check your input and try again.';
@@ -133,6 +146,35 @@ const AddBook: React.FC = () => {
                   onChange={e => setStartDate(e.target.value)}
                   className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+              </div>
+            </div>
+
+            <div className="space-y-xs">
+              <label className="font-label-caps text-label-caps text-on-surface-variant block">COVER IMAGE (OPTIONAL)</label>
+              <div className="flex items-center gap-md">
+                <div className="w-16 h-24 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  {coverPreview
+                    ? <img src={coverPreview} alt="Preview" className="w-full h-full object-cover" />
+                    : <span className="material-symbols-outlined text-outline-variant">book</span>}
+                </div>
+                <div className="space-y-xs">
+                  <input id="cover-upload" type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={handleCoverChange} className="hidden" />
+                  <label htmlFor="cover-upload"
+                    className="inline-flex items-center gap-xs cursor-pointer px-md py-sm border border-outline-variant rounded-lg text-body-sm hover:bg-surface-container transition-colors">
+                    <span className="material-symbols-outlined text-[18px]">upload</span>
+                    {coverFile ? coverFile.name : 'Choose image'}
+                  </label>
+                  {coverFile && (
+                    <button type="button"
+                      onClick={() => { setCoverFile(null); setCoverPreview(null); }}
+                      className="block text-body-sm text-on-surface-variant hover:text-error transition-colors">
+                      Remove
+                    </button>
+                  )}
+                  <p className="text-body-sm text-on-surface-variant">JPEG · PNG · WEBP · max 5 MB</p>
+                </div>
               </div>
             </div>
           </div>

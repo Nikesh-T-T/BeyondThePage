@@ -13,4 +13,5 @@ public class BookCreatedResponse {
 	private int plannedDays;
 	private LocalDate startDate;
 	private int completedPages;
+	private boolean hasCoverImage;
 }

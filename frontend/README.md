@@ -36,7 +36,7 @@ npm run build
 frontend/
 ├── public/
 ├── src/
-│   ├── api.ts                  # Axios API client (all backend calls)
+│   ├── api.ts                  # Axios API client (books, cover upload/serve, dashboard)
 │   ├── types.ts                # TypeScript types matching backend DTOs
 │   ├── App.tsx                 # Root component with React Router setup
 │   ├── index.css               # Tailwind base + global styles

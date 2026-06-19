@@ -140,7 +140,7 @@ class BookServiceTest {
 		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
 		stubProgressCalculations(book, TARGET_END_DATE, 10L, 50L, 100.0, 10.0, BookStatus.ON_TRACK);
 
-		List<BookSummaryResponse> responses = bookService.getAllBooks();
+		List<BookSummaryResponse> responses = bookService.getAllBooks(null);
 
 		assertEquals(1, responses.size());
 		assertEquals("Test Book", responses.get(0).getBookName());
@@ -259,7 +259,7 @@ class BookServiceTest {
 		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
 		stubProgressCalculations(book, TARGET_END_DATE, 10L, 50L, 100.0, 10.0, expectedStatus);
 
-		List<BookSummaryResponse> responses = bookService.getAllBooks();
+		List<BookSummaryResponse> responses = bookService.getAllBooks(null);
 
 		assertEquals(expectedStatus, responses.get(0).getCurrentStatus());
 	}

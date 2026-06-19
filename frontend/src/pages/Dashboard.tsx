@@ -103,8 +103,12 @@ const Dashboard: React.FC = () => {
                     className="card p-lg flex flex-col md:flex-row md:items-center gap-lg cursor-pointer"
                     onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
                   >
-                    <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-on-surface-variant">book</span>
+                    <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
+                      {book.hasCoverImage
+                        ? <img src={`/api/books/${encodeURIComponent(book.bookName)}/cover`}
+                               alt={`${book.bookName} cover`}
+                               className="w-full h-full object-cover" />
+                        : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
                     </div>
                     <div className="flex-grow space-y-xs">
                       <h4 className="text-[18px] font-semibold leading-tight text-on-surface">{book.bookName}</h4>
@@ -190,25 +194,25 @@ const Dashboard: React.FC = () => {
               </div>
             )}
 
-            <div className="card p-lg bg-primary-container text-on-primary border-none shadow-lg">
-              <h3 className="text-headline-lg-mobile font-semibold mb-sm text-white">Reading Stats</h3>
-              <p className="text-body-sm mb-lg opacity-90 text-white">
+            <div className="p-lg rounded-xl bg-primary-fixed text-on-primary-fixed shadow-lg">
+              <h3 className="text-headline-lg-mobile font-semibold mb-sm">Reading Stats</h3>
+              <p className="text-body-sm mb-lg opacity-70">
                 {summary?.completedBooks ?? 0} of {summary?.totalBooks ?? 0} books completed
               </p>
               <div className="flex items-center justify-center py-md relative">
                 <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="transparent" r="44" stroke="rgba(255,255,255,0.15)" strokeWidth="8" />
+                  <circle cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" strokeOpacity="0.15" strokeWidth="8" />
                   {(summary?.totalBooks ?? 0) > 0 && (
                     <circle
                       cx="50" cy="50" fill="transparent" r="44"
-                      stroke="white" strokeWidth="8"
+                      stroke="currentColor" strokeWidth="8"
                       strokeDasharray={`${2 * Math.PI * 44}`}
                       strokeDashoffset={`${2 * Math.PI * 44 * (1 - (summary!.completedBooks / summary!.totalBooks))}`}
                       strokeLinecap="round"
                     />
                   )}
                 </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-headline-xl font-bold leading-none">
                     {summary?.completedBooks ?? 0}/{summary?.totalBooks ?? 0}
                   </span>

@@ -28,4 +28,5 @@ public class BookDetailResponse {
 	private int pendingChapters;
 	private int overdueChapters;
 	private List<ChapterDetailResponse> chapters;
+	private boolean hasCoverImage;
 }

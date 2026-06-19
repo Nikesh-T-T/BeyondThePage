@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderBy;
@@ -35,6 +36,13 @@ public class Book {
 
 	@Column(name = "start_date", nullable = false)
 	private LocalDate startDate;
+
+	@Lob
+	@Column(name = "cover_image")
+	private byte[] coverImage;
+
+	@Column(name = "cover_image_type", length = 50)
+	private String coverImageType;
 
 	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@OrderBy("chapterId.chapterNumber ASC")

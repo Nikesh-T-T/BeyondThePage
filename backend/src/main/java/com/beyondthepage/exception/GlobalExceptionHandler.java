@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -57,6 +58,12 @@ public class GlobalExceptionHandler {
 		String error = "Invalid value '" + ex.getValue() + "' for parameter '" + ex.getName() + "'";
 		return ResponseEntity.badRequest()
 				.body(ApiErrorResponse.of("Invalid request parameter", List.of(error)));
+	}
+
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	public ResponseEntity<ApiErrorResponse> handleMaxUploadSize(MaxUploadSizeExceededException ex) {
+		return ResponseEntity.badRequest()
+				.body(ApiErrorResponse.of("Cover image must be 5 MB or smaller", List.of()));
 	}
 
 	@ExceptionHandler(Exception.class)

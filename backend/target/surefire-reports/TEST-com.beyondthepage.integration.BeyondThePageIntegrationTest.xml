@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="3.28" tests="24" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="4.271" tests="24" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/test-classes:/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/classes:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-classic/1.5.12/logback-classic-1.5.12.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-core/1.5.12/logback-core-1.5.12.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/i353767/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/i353767/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/i353767/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/i353767/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/i353767/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/i353767/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/i353767/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/i353767/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/i353767/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/i353767/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/i353767/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/i353767/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/i353767/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/i353767/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/i353767/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/i353767/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/i353767/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/i353767/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/i353767/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/i353767/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/i353767/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.1/spring-boot-starter-validation-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/i353767/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/i353767/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/i353767/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/i353767/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.2/jackson-dataformat-toml-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/i353767/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/i353767/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/i353767/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/i353767/.m2/repository/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar:/Users/i353767/.m2/repository/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar:/Users/i353767/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/i353767/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/i353767/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/i353767/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/i353767/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/i353767/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/i353767/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/i353767/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/i353767/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/i353767/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/i353767/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/i353767/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar:/Users/i353767/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
+    <property name="java.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/test-classes:/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/classes:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.1/spring-boot-starter-actuator-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-classic/1.5.12/logback-classic-1.5.12.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-core/1.5.12/logback-core-1.5.12.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/i353767/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/i353767/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/i353767/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.1/spring-boot-actuator-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.1/spring-boot-actuator-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.2/micrometer-jakarta9-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-core/1.14.2/micrometer-core-1.14.2.jar:/Users/i353767/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/i353767/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/i353767/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/i353767/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/i353767/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/i353767/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/i353767/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/i353767/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/i353767/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/i353767/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/i353767/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/i353767/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/i353767/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/i353767/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/i353767/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/i353767/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/i353767/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/i353767/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/i353767/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.1/spring-boot-starter-validation-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/i353767/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/i353767/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/i353767/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/i353767/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.2/jackson-dataformat-toml-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/i353767/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/i353767/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/i353767/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/i353767/.m2/repository/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar:/Users/i353767/.m2/repository/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar:/Users/i353767/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/i353767/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/i353767/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/i353767/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/i353767/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/i353767/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/i353767/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/i353767/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/i353767/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/i353767/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/i353767/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/i353767/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar:/Users/i353767/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
     <property name="java.vm.vendor" value="SAP SE"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://sapmachine.io/"/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/sapmachine-21.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire/surefirebooter-20260618235901111_3.jar /Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire 2026-06-18T23-59-01_067-jvmRun1 surefire-20260618235901111_1tmp surefire_0-20260618235901111_2tmp"/>
+    <property name="sun.java.command" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire/surefirebooter-20260619153003941_3.jar /Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire 2026-06-19T15-30-03_806-jvmRun1 surefire-20260619153003941_1tmp surefire_0-20260619153003941_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/test-classes:/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/classes:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-classic/1.5.12/logback-classic-1.5.12.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-core/1.5.12/logback-core-1.5.12.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/i353767/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/i353767/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/i353767/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/i353767/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/i353767/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/i353767/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/i353767/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/i353767/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/i353767/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/i353767/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/i353767/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/i353767/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/i353767/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/i353767/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/i353767/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/i353767/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/i353767/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/i353767/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/i353767/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/i353767/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/i353767/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.1/spring-boot-starter-validation-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/i353767/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/i353767/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/i353767/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/i353767/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.2/jackson-dataformat-toml-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/i353767/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/i353767/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/i353767/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/i353767/.m2/repository/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar:/Users/i353767/.m2/repository/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar:/Users/i353767/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/i353767/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/i353767/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/i353767/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/i353767/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/i353767/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/i353767/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/i353767/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/i353767/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/i353767/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/i353767/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/i353767/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar:/Users/i353767/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/test-classes:/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/classes:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.1/spring-boot-starter-actuator-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-classic/1.5.12/logback-classic-1.5.12.jar:/Users/i353767/.m2/repository/ch/qos/logback/logback-core/1.5.12/logback-core-1.5.12.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/i353767/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/i353767/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/i353767/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/i353767/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.1/spring-boot-actuator-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.1/spring-boot-actuator-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.2/micrometer-jakarta9-1.14.2.jar:/Users/i353767/.m2/repository/io/micrometer/micrometer-core/1.14.2/micrometer-core-1.14.2.jar:/Users/i353767/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/i353767/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/i353767/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/i353767/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/i353767/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/i353767/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/i353767/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/i353767/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/i353767/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/i353767/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/i353767/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/i353767/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/i353767/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/i353767/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/i353767/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/i353767/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/i353767/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/i353767/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/i353767/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/i353767/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.1/spring-boot-starter-validation-3.4.1.jar:/Users/i353767/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/i353767/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/i353767/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/i353767/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/i353767/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.2/jackson-dataformat-toml-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/i353767/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/i353767/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar:/Users/i353767/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar:/Users/i353767/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/i353767/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/i353767/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/i353767/.m2/repository/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar:/Users/i353767/.m2/repository/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar:/Users/i353767/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/i353767/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/i353767/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/i353767/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/i353767/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/i353767/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/i353767/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/i353767/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/i353767/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/i353767/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/i353767/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/i353767/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/i353767/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/i353767/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar:/Users/i353767/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar:/Users/i353767/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/i353767"/>
     <property name="user.language" value="en"/>
@@ -33,7 +33,7 @@
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire/surefirebooter-20260618235901111_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend/target/surefire/surefirebooter-20260619153003941_3.jar"/>
     <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.7+6-LTS"/>
@@ -53,7 +53,7 @@
     <property name="user.dir" value="/Users/i353767/Documents/GitHub/BeyondThePage/init/backend"/>
     <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="82471"/>
+    <property name="PID" value="34669"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/i353767/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
@@ -65,9 +65,9 @@
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[beyond-the-page] "/>
   </properties>
-  <testcase name="shouldReturnWeeklyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.48">
-    <system-out><![CDATA[23:59:01.676 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.beyondthepage.integration.BeyondThePageIntegrationTest]: BeyondThePageIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:59:01.737 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.beyondthepage.BeyondThePageApplication for test class com.beyondthepage.integration.BeyondThePageIntegrationTest
+  <testcase name="shouldReturnWeeklyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.537">
+    <system-out><![CDATA[15:30:04.452 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.beyondthepage.integration.BeyondThePageIntegrationTest]: BeyondThePageIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:30:04.512 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.beyondthepage.BeyondThePageApplication for test class com.beyondthepage.integration.BeyondThePageIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -78,27 +78,28 @@
 
  :: Spring Boot ::                (v3.4.1)
 
-2026-06-18T23:59:01.914+05:30  INFO 82471 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : Starting BeyondThePageIntegrationTest using Java 21.0.7 with PID 82471 (started by i353767 in /Users/i353767/Documents/GitHub/BeyondThePage/init/backend)
-2026-06-18T23:59:01.915+05:30  INFO 82471 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
-2026-06-18T23:59:02.202+05:30  INFO 82471 --- [beyond-the-page] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-18T23:59:02.240+05:30  INFO 82471 --- [beyond-the-page] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 3 JPA repository interfaces.
-2026-06-18T23:59:02.505+05:30  INFO 82471 --- [beyond-the-page] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-18T23:59:02.600+05:30  INFO 82471 --- [beyond-the-page] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:beyondthepage user=SA
-2026-06-18T23:59:02.601+05:30  INFO 82471 --- [beyond-the-page] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-18T23:59:02.625+05:30  INFO 82471 --- [beyond-the-page] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:beyondthepage (H2 2.3)
-2026-06-18T23:59:02.631+05:30  WARN 82471 --- [beyond-the-page] [           main] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
-2026-06-18T23:59:02.643+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
-2026-06-18T23:59:02.644+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.006s)
-2026-06-18T23:59:02.647+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
-2026-06-18T23:59:02.665+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
-2026-06-18T23:59:02.669+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "1 - init"
-2026-06-18T23:59:02.682+05:30  INFO 82471 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema "PUBLIC", now at version v1 (execution time 00:00.006s)
-2026-06-18T23:59:02.729+05:30  INFO 82471 --- [beyond-the-page] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-18T23:59:02.755+05:30  INFO 82471 --- [beyond-the-page] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
-2026-06-18T23:59:02.769+05:30  INFO 82471 --- [beyond-the-page] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-18T23:59:02.882+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-18T23:59:02.903+05:30  WARN 82471 --- [beyond-the-page] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-18T23:59:02.909+05:30  INFO 82471 --- [beyond-the-page] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-06-19T15:30:04.692+05:30  INFO 34669 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : Starting BeyondThePageIntegrationTest using Java 21.0.7 with PID 34669 (started by i353767 in /Users/i353767/Documents/GitHub/BeyondThePage/init/backend)
+2026-06-19T15:30:04.693+05:30  INFO 34669 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T15:30:05.088+05:30  INFO 34669 --- [beyond-the-page] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19T15:30:05.118+05:30  INFO 34669 --- [beyond-the-page] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 3 JPA repository interfaces.
+2026-06-19T15:30:05.499+05:30  INFO 34669 --- [beyond-the-page] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-19T15:30:05.584+05:30  INFO 34669 --- [beyond-the-page] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:beyondthepage user=SA
+2026-06-19T15:30:05.585+05:30  INFO 34669 --- [beyond-the-page] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-19T15:30:05.611+05:30  INFO 34669 --- [beyond-the-page] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:beyondthepage (H2 2.3)
+2026-06-19T15:30:05.618+05:30  WARN 34669 --- [beyond-the-page] [           main] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+2026-06-19T15:30:05.629+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-06-19T15:30:05.631+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.007s)
+2026-06-19T15:30:05.635+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-06-19T15:30:05.653+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-06-19T15:30:05.657+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "1 - init"
+2026-06-19T15:30:05.669+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "2 - add cover image"
+2026-06-19T15:30:05.680+05:30  INFO 34669 --- [beyond-the-page] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "PUBLIC", now at version v2 (execution time 00:00.014s)
+2026-06-19T15:30:05.739+05:30  INFO 34669 --- [beyond-the-page] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19T15:30:05.773+05:30  INFO 34669 --- [beyond-the-page] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2026-06-19T15:30:05.799+05:30  INFO 34669 --- [beyond-the-page] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-19T15:30:05.928+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19T15:30:05.950+05:30  WARN 34669 --- [beyond-the-page] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19T15:30:05.957+05:30  INFO 34669 --- [beyond-the-page] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -106,17 +107,20 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-06-18T23:59:03.347+05:30  INFO 82471 --- [beyond-the-page] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-18T23:59:03.356+05:30  INFO 82471 --- [beyond-the-page] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-18T23:59:03.461+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-18T23:59:03.994+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:beyondthepage'
-2026-06-18T23:59:04.020+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-06-18T23:59:04.020+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-06-18T23:59:04.021+05:30  INFO 82471 --- [beyond-the-page] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-06-18T23:59:04.035+05:30  INFO 82471 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : Started BeyondThePageIntegrationTest in 2.242 seconds (process running for 2.872)
+2026-06-19T15:30:06.416+05:30  INFO 34669 --- [beyond-the-page] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19T15:30:06.426+05:30  INFO 34669 --- [beyond-the-page] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19T15:30:06.566+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19T15:30:07.537+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:beyondthepage'
+2026-06-19T15:30:07.555+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-06-19T15:30:07.555+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-06-19T15:30:07.560+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-06-19T15:30:07.570+05:30  INFO 34669 --- [beyond-the-page] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 14 ms
+2026-06-19T15:30:07.612+05:30  INFO 34669 --- [beyond-the-page] [           main] c.b.i.BeyondThePageIntegrationTest       : Started BeyondThePageIntegrationTest in 3.043 seconds (process running for 3.594)
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -134,6 +138,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -181,9 +187,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -208,6 +214,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -241,10 +249,12 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="shouldSetBookStatusToNotStartedWhenZeroPagesRead" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.032">
+  <testcase name="shouldSetBookStatusToNotStartedWhenZeroPagesRead" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.027">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -309,6 +319,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -356,9 +368,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -383,6 +395,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -397,10 +411,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn409WhenCreatingBookWithDuplicateName" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.018">
+  <testcase name="shouldReturn409WhenCreatingBookWithDuplicateName" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.021">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -465,6 +481,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -512,9 +530,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -547,10 +565,12 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenCompletedPagesExceedsTotalPages" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.021">
+  <testcase name="shouldReturn400WhenCompletedPagesExceedsTotalPages" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.025">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -615,6 +635,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -662,9 +684,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -689,6 +711,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -706,10 +730,12 @@ Hibernate:
         rp1_0.book_name=?
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnDashboardSummaryWithCorrectCounts" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.015">
+  <testcase name="shouldReturnDashboardSummaryWithCorrectCounts" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.016">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -774,6 +800,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -821,9 +849,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -848,6 +876,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -862,10 +892,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldSetBookStatusToCompletedWhenAllPagesRead" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.019">
+  <testcase name="shouldSetBookStatusToCompletedWhenAllPagesRead" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.024">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -930,6 +962,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -977,9 +1011,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1004,6 +1038,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1029,6 +1065,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -1043,10 +1081,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnAllBooksWithDerivedFields" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.013">
+  <testcase name="shouldReturnAllBooksWithDerivedFields" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.016">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1111,6 +1151,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1158,9 +1200,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1185,6 +1227,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -1199,10 +1243,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnDailyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldReturnDailyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.015">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1267,6 +1313,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1314,9 +1362,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1341,6 +1389,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -1355,10 +1405,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnMonthlyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldReturnMonthlyDashboard" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.016">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1423,6 +1475,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1470,9 +1524,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1497,6 +1551,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -1511,10 +1567,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenFirstChapterDoesNotStartAtPageOne" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.013">
+  <testcase name="shouldReturn400WhenFirstChapterDoesNotStartAtPageOne" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1579,6 +1637,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1626,9 +1686,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1661,10 +1721,12 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnBookDetailWithChapters" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.02">
+  <testcase name="shouldReturnBookDetailWithChapters" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.021">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1729,6 +1791,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1776,9 +1840,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1808,6 +1872,8 @@ Hibernate:
         c1_0.chapter_title,
         c1_0.end_page,
         c1_0.start_page,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -1827,10 +1893,12 @@ Hibernate:
         c1_0.chapter_number
 ]]></system-out>
   </testcase>
-  <testcase name="shouldUpdateProgressSuccessfully" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldUpdateProgressSuccessfully" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.017">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -1895,6 +1963,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -1942,9 +2012,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -1969,757 +2039,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=?
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    update
-        reading_progress 
-    set
-        completed_pages=? 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page,
-        b1_0.planned_days,
-        rp1_0.book_name,
-        rp1_0.completed_pages,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0 
-    join
-        reading_progress rp1_0 
-            on b1_0.book_name=rp1_0.book_name 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-]]></system-out>
-  </testcase>
-  <testcase name="shouldReturn400WhenLastChapterDoesNotEndAtTotalPages" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.012">
-    <system-out><![CDATA[Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    select
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        book_chapters c1_0 
-    where
-        c1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        reading_progress 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        books 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        books b1_0 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    insert 
-    into
-        books
-        (planned_days, start_date, total_pages, book_name) 
-    values
-        (?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        reading_progress
-        (completed_pages, book_name) 
-    values
-        (?, ?)
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-]]></system-out>
-  </testcase>
-  <testcase name="shouldReturn400WhenBookNameIsBlank" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
-    <system-out><![CDATA[Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    select
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        book_chapters c1_0 
-    where
-        c1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        reading_progress 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        books 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        books b1_0 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    insert 
-    into
-        books
-        (planned_days, start_date, total_pages, book_name) 
-    values
-        (?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        reading_progress
-        (completed_pages, book_name) 
-    values
-        (?, ?)
-]]></system-out>
-  </testcase>
-  <testcase name="shouldCreateBookAndReturnCreatedResponse" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
-    <system-out><![CDATA[Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    select
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        book_chapters c1_0 
-    where
-        c1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        reading_progress 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        books 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        books b1_0 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    insert 
-    into
-        books
-        (planned_days, start_date, total_pages, book_name) 
-    values
-        (?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        reading_progress
-        (completed_pages, book_name) 
-    values
-        (?, ?)
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        books b1_0 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    insert 
-    into
-        books
-        (planned_days, start_date, total_pages, book_name) 
-    values
-        (?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        reading_progress
-        (completed_pages, book_name) 
-    values
-        (?, ?)
-]]></system-out>
-  </testcase>
-  <testcase name="shouldAllowProgressToBeReducedToLowerValue" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.017">
-    <system-out><![CDATA[Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    select
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        book_chapters c1_0 
-    where
-        c1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        book_chapters c1_0 
-    where
-        c1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        reading_progress 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        books 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        book_chapters 
-    where
-        book_name=? 
-        and chapter_number=?
-Hibernate: 
-    delete 
-    from
-        reading_progress 
-    where
-        book_name=?
-Hibernate: 
-    delete 
-    from
-        books 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages,
-        c1_0.book_name,
-        c1_0.chapter_number,
-        c1_0.chapter_title,
-        c1_0.end_page,
-        c1_0.start_page 
-    from
-        books b1_0 
-    left join
-        book_chapters c1_0 
-            on b1_0.book_name=c1_0.book_name 
-    where
-        b1_0.book_name=? 
-    order by
-        c1_0.chapter_number
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    select
-        bc1_0.book_name,
-        bc1_0.chapter_number,
-        bc1_0.chapter_title,
-        bc1_0.end_page,
-        bc1_0.start_page 
-    from
-        book_chapters bc1_0 
-    where
-        (
-            bc1_0.book_name, bc1_0.chapter_number
-        ) in ((?, ?))
-Hibernate: 
-    insert 
-    into
-        books
-        (planned_days, start_date, total_pages, book_name) 
-    values
-        (?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        book_chapters
-        (chapter_title, end_page, start_page, book_name, chapter_number) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        reading_progress
-        (completed_pages, book_name) 
-    values
-        (?, ?)
-Hibernate: 
-    select
-        b1_0.book_name,
-        b1_0.planned_days,
-        b1_0.start_date,
-        b1_0.total_pages 
-    from
-        books b1_0 
-    where
-        b1_0.book_name=?
-Hibernate: 
-    select
-        rp1_0.book_name,
-        rp1_0.completed_pages 
-    from
-        reading_progress rp1_0 
-    where
-        rp1_0.book_name=?
-Hibernate: 
-    update
-        reading_progress 
-    set
-        completed_pages=? 
-    where
-        book_name=?
-Hibernate: 
-    select
-        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -2750,6 +2071,8 @@ Hibernate:
         c1_0.chapter_title,
         c1_0.end_page,
         c1_0.start_page,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -2769,10 +2092,12 @@ Hibernate:
         c1_0.chapter_number
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenBookNotFound" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.01">
+  <testcase name="shouldReturn400WhenLastChapterDoesNotEndAtTotalPages" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.015">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -2837,6 +2162,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -2884,9 +2211,784 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        reading_progress
+        (completed_pages, book_name) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+]]></system-out>
+  </testcase>
+  <testcase name="shouldReturn400WhenBookNameIsBlank" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.015">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    select
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        book_chapters c1_0 
+    where
+        c1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        reading_progress 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        books b1_0 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    insert 
+    into
+        books
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        reading_progress
+        (completed_pages, book_name) 
+    values
+        (?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="shouldCreateBookAndReturnCreatedResponse" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.015">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    select
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        book_chapters c1_0 
+    where
+        c1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        reading_progress 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        books b1_0 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    insert 
+    into
+        books
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        reading_progress
+        (completed_pages, book_name) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        books b1_0 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    insert 
+    into
+        books
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        reading_progress
+        (completed_pages, book_name) 
+    values
+        (?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="shouldAllowProgressToBeReducedToLowerValue" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.019">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    select
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        book_chapters c1_0 
+    where
+        c1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        book_chapters c1_0 
+    where
+        c1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        reading_progress 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        reading_progress 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        books b1_0 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    insert 
+    into
+        books
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_chapters
+        (chapter_title, end_page, start_page, book_name, chapter_number) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        reading_progress
+        (completed_pages, book_name) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=?
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    update
+        reading_progress 
+    set
+        completed_pages=? 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=?
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    update
+        reading_progress 
+    set
+        completed_pages=? 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        rp1_0.book_name,
+        rp1_0.completed_pages,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0 
+    join
+        reading_progress rp1_0 
+            on b1_0.book_name=rp1_0.book_name 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+]]></system-out>
+  </testcase>
+  <testcase name="shouldReturn404WhenBookNotFound" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.012">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages 
+    from
+        books b1_0
+Hibernate: 
+    select
+        rp1_0.book_name,
+        rp1_0.completed_pages 
+    from
+        reading_progress rp1_0 
+    where
+        rp1_0.book_name=?
+Hibernate: 
+    select
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        book_chapters c1_0 
+    where
+        c1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        book_chapters 
+    where
+        book_name=? 
+        and chapter_number=?
+Hibernate: 
+    delete 
+    from
+        reading_progress 
+    where
+        book_name=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        book_name=?
+Hibernate: 
+    select
+        b1_0.book_name 
+    from
+        books b1_0 
+    where
+        b1_0.book_name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
+        b1_0.planned_days,
+        b1_0.start_date,
+        b1_0.total_pages,
+        c1_0.book_name,
+        c1_0.chapter_number,
+        c1_0.chapter_title,
+        c1_0.end_page,
+        c1_0.start_page 
+    from
+        books b1_0 
+    left join
+        book_chapters c1_0 
+            on b1_0.book_name=c1_0.book_name 
+    where
+        b1_0.book_name=? 
+    order by
+        c1_0.chapter_number
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    select
+        bc1_0.book_name,
+        bc1_0.chapter_number,
+        bc1_0.chapter_title,
+        bc1_0.end_page,
+        bc1_0.start_page 
+    from
+        book_chapters bc1_0 
+    where
+        (
+            bc1_0.book_name, bc1_0.chapter_number
+        ) in ((?, ?))
+Hibernate: 
+    insert 
+    into
+        books
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
+    values
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -2916,6 +3018,8 @@ Hibernate:
         c1_0.chapter_title,
         c1_0.end_page,
         c1_0.start_page,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -2935,10 +3039,12 @@ Hibernate:
         c1_0.chapter_number
 ]]></system-out>
   </testcase>
-  <testcase name="shouldAllowProgressToBeSetToZero" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldAllowProgressToBeSetToZero" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.018">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3003,6 +3109,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3050,9 +3158,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3077,6 +3185,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3102,6 +3212,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3132,6 +3244,8 @@ Hibernate:
         c1_0.chapter_title,
         c1_0.end_page,
         c1_0.start_page,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -3151,10 +3265,12 @@ Hibernate:
         c1_0.chapter_number
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400ForInvalidDateFormat" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldReturn400ForInvalidDateFormat" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.013">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3219,6 +3335,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3266,9 +3384,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3292,10 +3410,12 @@ Hibernate:
         (?, ?)
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400ForInvalidMonthFormat" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.012">
+  <testcase name="shouldReturn400ForInvalidMonthFormat" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.011">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3360,6 +3480,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3407,9 +3529,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3433,10 +3555,12 @@ Hibernate:
         (?, ?)
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnEmptyDailyDashboardWhenNoBooksExist" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.014">
+  <testcase name="shouldReturnEmptyDailyDashboardWhenNoBooksExist" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.016">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3501,6 +3625,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3548,9 +3674,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3575,6 +3701,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3630,6 +3758,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,
@@ -3644,10 +3774,12 @@ Hibernate:
         b1_0.book_name
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenUpdatingProgressForUnknownBook" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.009">
+  <testcase name="shouldReturn404WhenUpdatingProgressForUnknownBook" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.01">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3665,6 +3797,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3712,9 +3846,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3739,6 +3873,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3748,10 +3884,12 @@ Hibernate:
         b1_0.book_name=?
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenChaptersHaveGap" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.01">
+  <testcase name="shouldReturn400WhenChaptersHaveGap" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.012">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3816,6 +3954,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -3863,9 +4003,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -3898,10 +4038,12 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturnDashboardSummaryWithCompletedBookCounted" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.011">
+  <testcase name="shouldReturnDashboardSummaryWithCompletedBookCounted" classname="com.beyondthepage.integration.BeyondThePageIntegrationTest" time="0.012">
     <system-out><![CDATA[Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -3966,6 +4108,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages,
@@ -4013,9 +4157,9 @@ Hibernate:
     insert 
     into
         books
-        (planned_days, start_date, total_pages, book_name) 
+        (cover_image, cover_image_type, planned_days, start_date, total_pages, book_name) 
     values
-        (?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?)
 Hibernate: 
     insert 
     into
@@ -4040,6 +4184,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         b1_0.start_date,
         b1_0.total_pages 
@@ -4065,6 +4211,8 @@ Hibernate:
 Hibernate: 
     select
         b1_0.book_name,
+        b1_0.cover_image,
+        b1_0.cover_image_type,
         b1_0.planned_days,
         rp1_0.book_name,
         rp1_0.completed_pages,

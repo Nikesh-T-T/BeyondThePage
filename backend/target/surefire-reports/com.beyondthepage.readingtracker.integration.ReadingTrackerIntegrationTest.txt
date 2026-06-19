@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.beyondthepage.readingtracker.integration.ReadingTrackerIntegrationTest
--------------------------------------------------------------------------------
-Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.209 s -- in com.beyondthepage.readingtracker.integration.ReadingTrackerIntegrationTest

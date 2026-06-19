@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBook, updateProgress } from '../api';
+import { getBook, updateProgress, uploadCover } from '../api';
 import { BookDetail, ChapterStatus } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
@@ -21,6 +21,8 @@ const BookDetailPage: React.FC = () => {
   const [progressInput, setProgressInput] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const coverInputRef = useRef<HTMLInputElement>(null);
 
   const decoded = decodeURIComponent(bookName ?? '');
 
@@ -56,6 +58,22 @@ const BookDetailPage: React.FC = () => {
     }
   };
 
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingCover(true);
+    try {
+      await uploadCover(decoded, file);
+      const updated = await getBook(decoded);
+      setBook(updated);
+    } catch {
+      setError('Failed to upload cover. Use JPEG, PNG or WEBP under 5 MB.');
+    } finally {
+      setUploadingCover(false);
+      if (coverInputRef.current) coverInputRef.current.value = '';
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -85,10 +103,24 @@ const BookDetailPage: React.FC = () => {
 
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
-          <div className="lg:col-span-3 flex justify-center">
-            <div className="w-full max-w-[200px] aspect-[2/3] bg-surface-container-high rounded-xl shadow-xl flex items-center justify-center">
-              <span className="material-symbols-outlined text-[64px] text-outline-variant">book</span>
+          <div className="lg:col-span-3 flex flex-col items-center gap-sm">
+            <div className="w-full max-w-[200px] aspect-[2/3] bg-surface-container-high rounded-xl shadow-xl overflow-hidden flex items-center justify-center">
+              {book.hasCoverImage
+                ? <img src={`/api/books/${encodeURIComponent(decoded)}/cover`}
+                       alt={`${book.bookName} cover`}
+                       className="w-full h-full object-cover" />
+                : <span className="material-symbols-outlined text-[64px] text-outline-variant">book</span>}
             </div>
+            <input ref={coverInputRef} id="cover-upload-detail" type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleCoverUpload} className="hidden" />
+            <label htmlFor="cover-upload-detail"
+              className="inline-flex items-center gap-xs cursor-pointer px-md py-sm border border-outline-variant rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container transition-colors w-full max-w-[200px] justify-center">
+              {uploadingCover
+                ? <span className="material-symbols-outlined text-[16px] animate-spin">autorenew</span>
+                : <span className="material-symbols-outlined text-[16px]">upload</span>}
+              <span>{uploadingCover ? 'Uploading…' : book.hasCoverImage ? 'Replace Cover' : 'Upload Cover'}</span>
+            </label>
           </div>
 
           <div className="lg:col-span-9 space-y-lg">

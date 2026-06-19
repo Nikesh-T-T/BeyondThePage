@@ -19,8 +19,8 @@ interface ApiResponse<T> {
   data: T;
 }
 
-export const getBooks = () =>
-  api.get<ApiResponse<BookSummary[]>>('/books').then(r => r.data.data);
+export const getBooks = (q?: string) =>
+  api.get<ApiResponse<BookSummary[]>>('/books', { params: q ? { q } : {} }).then(r => r.data.data);
 
 export const getBook = (bookName: string) =>
   api.get<ApiResponse<BookDetail>>(`/books/${encodeURIComponent(bookName)}`).then(r => r.data.data);
@@ -30,6 +30,12 @@ export const createBook = (req: CreateBookRequest) =>
 
 export const updateProgress = (bookName: string, completedPages: number) =>
   api.put(`/books/${encodeURIComponent(bookName)}/progress`, { completedPages });
+
+export const uploadCover = (bookName: string, file: File): Promise<void> => {
+  const form = new FormData();
+  form.append('file', file);
+  return api.put(`/books/${encodeURIComponent(bookName)}/cover`, form).then(() => {});
+};
 
 export const getDashboardSummary = () =>
   api.get<ApiResponse<DashboardSummary>>('/dashboard/summary').then(r => r.data.data);

@@ -22,6 +22,7 @@ export interface BookSummary {
   currentStatus: BookStatus;
   daysElapsed: number;
   daysRemaining: number;
+  hasCoverImage: boolean;
 }
 
 export interface BookDetail extends BookSummary {
@@ -67,6 +68,7 @@ export interface DailyBookProgress {
   completedPages: number;
   variancePages: number;
   status: BookStatus;
+  hasCoverImage: boolean;
 }
 
 export interface CreateBookRequest {

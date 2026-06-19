@@ -8,15 +8,23 @@ import StatusBadge from '../components/StatusBadge';
 const Books: React.FC = () => {
   const [books, setBooks] = useState<BookSummary[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    getBooks()
+    const timer = setTimeout(() => setSearchQuery(searchInput), 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  useEffect(() => {
+    setLoading(true);
+    getBooks(searchQuery || undefined)
       .then(setBooks)
       .finally(() => setLoading(false));
-  }, []);
+  }, [searchQuery]);
 
-  if (loading) {
+  if (loading && !searchQuery) {
     return (
       <div className="flex items-center justify-center h-screen">
         <span className="material-symbols-outlined animate-spin text-primary text-[48px]">autorenew</span>
@@ -26,11 +34,13 @@ const Books: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <TopBar title="Beyond The Page" />
+      <TopBar title="Beyond The Page" searchValue={searchInput} onSearch={setSearchInput} />
 
       <div className="max-w-container-max mx-auto p-lg space-y-xl">
         <div className="flex justify-between items-center">
-          <h2 className="text-h1 font-bold text-primary">All Books</h2>
+          <h2 className="text-h1 font-bold text-primary">
+            {searchQuery ? `Results for "${searchQuery}"` : 'All Books'}
+          </h2>
           <button
             onClick={() => navigate('/books/new')}
             className="flex items-center gap-2 px-lg py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity"
@@ -40,16 +50,24 @@ const Books: React.FC = () => {
           </button>
         </div>
 
-        {books.length === 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-xl">
+            <span className="material-symbols-outlined animate-spin text-primary text-[48px]">autorenew</span>
+          </div>
+        ) : books.length === 0 ? (
           <div className="card p-xl text-center">
             <span className="material-symbols-outlined text-[64px] text-outline-variant mb-md block">library_books</span>
-            <p className="text-on-surface-variant text-body-md mb-md">Your library is empty.</p>
-            <button
-              onClick={() => navigate('/books/new')}
-              className="px-lg py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity"
-            >
-              Add Your First Book
-            </button>
+            <p className="text-on-surface-variant text-body-md mb-md">
+              {searchQuery ? `No books found matching "${searchQuery}".` : 'Your library is empty.'}
+            </p>
+            {!searchQuery && (
+              <button
+                onClick={() => navigate('/books/new')}
+                className="px-lg py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity"
+              >
+                Add Your First Book
+              </button>
+            )}
           </div>
         ) : (
           <div className="space-y-md">
@@ -59,8 +77,12 @@ const Books: React.FC = () => {
                 className="card p-lg flex flex-col md:flex-row md:items-center gap-lg cursor-pointer"
                 onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
               >
-                <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-on-surface-variant">book</span>
+                <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
+                  {book.hasCoverImage
+                    ? <img src={`/api/books/${encodeURIComponent(book.bookName)}/cover`}
+                           alt={`${book.bookName} cover`}
+                           className="w-full h-full object-cover" />
+                    : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
                 </div>
 
                 <div className="flex-grow space-y-xs">
