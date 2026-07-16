@@ -14,7 +14,7 @@ public class HealthCheckScheduler {
 
 	private static final Logger log = LoggerFactory.getLogger(HealthCheckScheduler.class);
 
-	@Value("${healthcheck.service-url}")
+	@Value("${healthcheck.service-url}/actuator/health")
 	private String serviceUrl;
 
 	private final RestTemplate restTemplate = new RestTemplate();
