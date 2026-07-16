@@ -26,7 +26,11 @@ public class CreateBookRequest {
 	@NotNull(message = "startDate is required")
 	private LocalDate startDate;
 
+	@NotBlank(message = "category is required")
 	private String category;
+
+	@NotBlank(message = "author is required")
+	private String author;
 
 	@NotEmpty(message = "At least one chapter is required")
 	@Valid

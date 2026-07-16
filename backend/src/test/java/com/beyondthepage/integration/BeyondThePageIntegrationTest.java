@@ -3,6 +3,7 @@ package com.beyondthepage.integration;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -31,6 +32,8 @@ class BeyondThePageIntegrationTest {
 	private static final String CREATE_CLEAN_CODE_JSON = """
 			{
 			  "bookName": "Clean Code",
+			  "category": "Technology",
+			  "author": "Robert C. Martin",
 			  "totalPages": 100,
 			  "plannedDays": 10,
 			  "startDate": "2026-07-01",
@@ -57,6 +60,8 @@ class BeyondThePageIntegrationTest {
 				.content("""
 						{
 						  "bookName": "Refactoring",
+						  "category": "Technology",
+						  "author": "Martin Fowler",
 						  "totalPages": 200,
 						  "plannedDays": 20,
 						  "startDate": "2026-07-01",
@@ -68,6 +73,8 @@ class BeyondThePageIntegrationTest {
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.status", is("SUCCESS")))
 				.andExpect(jsonPath("$.data.bookName", is("Refactoring")))
+				.andExpect(jsonPath("$.data.category", is("Technology")))
+				.andExpect(jsonPath("$.data.author", is("Martin Fowler")))
 				.andExpect(jsonPath("$.data.totalPages", is(200)))
 				.andExpect(jsonPath("$.data.plannedDays", is(20)))
 				.andExpect(jsonPath("$.data.completedPages", is(0)));
@@ -81,6 +88,7 @@ class BeyondThePageIntegrationTest {
 						{
 						  "bookName": "Domain-Driven Design",
 						  "category": "Technology",
+						  "author": "Eric Evans",
 						  "totalPages": 150,
 						  "plannedDays": 15,
 						  "startDate": "2026-07-01",
@@ -103,7 +111,7 @@ class BeyondThePageIntegrationTest {
 	}
 
 	@Test
-	void shouldCreateBookWithoutCategoryWhenOmitted() throws Exception {
+	void shouldReturn400WhenCategoryIsOmitted() throws Exception {
 		mockMvc.perform(post("/api/books")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("""
@@ -117,8 +125,58 @@ class BeyondThePageIntegrationTest {
 						  ]
 						}
 						"""))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.status", is("ERROR")));
+	}
+
+	@Test
+	void shouldCreateBookWithAuthorAndReturnItInResponses() throws Exception {
+		mockMvc.perform(post("/api/books")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+						{
+						  "bookName": "Domain-Driven Design",
+						  "category": "Technology",
+						  "author": "Eric Evans",
+						  "totalPages": 150,
+						  "plannedDays": 15,
+						  "startDate": "2026-07-01",
+						  "chapters": [
+						    { "chapterNumber": 1, "chapterTitle": "Chapter 1", "startPage": 1, "endPage": 150 }
+						  ]
+						}
+						"""))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.data.category").doesNotExist());
+				.andExpect(jsonPath("$.data.author", is("Eric Evans")));
+
+		mockMvc.perform(get("/api/books/Domain-Driven Design"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data.author", is("Eric Evans")));
+
+		mockMvc.perform(get("/api/books"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data[?(@.bookName == 'Domain-Driven Design')].author",
+						org.hamcrest.Matchers.hasItem("Eric Evans")));
+	}
+
+	@Test
+	void shouldReturn400WhenAuthorIsOmitted() throws Exception {
+		mockMvc.perform(post("/api/books")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+						{
+						  "bookName": "Refactoring",
+						  "category": "Technology",
+						  "totalPages": 200,
+						  "plannedDays": 20,
+						  "startDate": "2026-07-01",
+						  "chapters": [
+						    { "chapterNumber": 1, "chapterTitle": "Chapter 1", "startPage": 1, "endPage": 200 }
+						  ]
+						}
+						"""))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.status", is("ERROR")));
 	}
 
 	@Test
@@ -138,6 +196,8 @@ class BeyondThePageIntegrationTest {
 				.content("""
 						{
 						  "bookName": "The Pragmatic Programmer",
+						  "category": "Technology",
+						  "author": "Andrew Hunt",
 						  "totalPages": 100,
 						  "plannedDays": 10,
 						  "startDate": "2026-07-01",
@@ -157,6 +217,8 @@ class BeyondThePageIntegrationTest {
 				.content("""
 						{
 						  "bookName": "The Pragmatic Programmer",
+						  "category": "Technology",
+						  "author": "Andrew Hunt",
 						  "totalPages": 100,
 						  "plannedDays": 10,
 						  "startDate": "2026-07-01",
@@ -176,6 +238,8 @@ class BeyondThePageIntegrationTest {
 				.content("""
 						{
 						  "bookName": "The Pragmatic Programmer",
+						  "category": "Technology",
+						  "author": "Andrew Hunt",
 						  "totalPages": 100,
 						  "plannedDays": 10,
 						  "startDate": "2026-07-01",
@@ -196,6 +260,8 @@ class BeyondThePageIntegrationTest {
 				.content("""
 						{
 						  "bookName": "",
+						  "category": "Technology",
+						  "author": "Andrew Hunt",
 						  "totalPages": 100,
 						  "plannedDays": 10,
 						  "startDate": "2026-07-01",
@@ -215,6 +281,8 @@ class BeyondThePageIntegrationTest {
 				.andExpect(jsonPath("$.status", is("SUCCESS")))
 				.andExpect(jsonPath("$.data", hasSize(1)))
 				.andExpect(jsonPath("$.data[0].bookName", is("Clean Code")))
+				.andExpect(jsonPath("$.data[0].category", is("Technology")))
+				.andExpect(jsonPath("$.data[0].author", is("Robert C. Martin")))
 				.andExpect(jsonPath("$.data[0].totalPages", is(100)))
 				.andExpect(jsonPath("$.data[0].completedPages", is(0)))
 				.andExpect(jsonPath("$.data[0].remainingPages", is(100)))
@@ -228,6 +296,8 @@ class BeyondThePageIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.status", is("SUCCESS")))
 				.andExpect(jsonPath("$.data.bookName", is("Clean Code")))
+				.andExpect(jsonPath("$.data.category", is("Technology")))
+				.andExpect(jsonPath("$.data.author", is("Robert C. Martin")))
 				.andExpect(jsonPath("$.data.chapters", hasSize(2)))
 				.andExpect(jsonPath("$.data.chapters[0].chapterTitle", is("Chapter 1")))
 				.andExpect(jsonPath("$.data.chapters[0].startPage", is(1)))
@@ -374,7 +444,12 @@ class BeyondThePageIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.status", is("SUCCESS")))
 				.andExpect(jsonPath("$.data.weekStartDate", is("2026-07-06")))
-				.andExpect(jsonPath("$.data.weekEndDate", is("2026-07-12")));
+				.andExpect(jsonPath("$.data.weekEndDate", is("2026-07-12")))
+				.andExpect(jsonPath("$.data.books", notNullValue()))
+				.andExpect(jsonPath("$.data.books[0].bookName", is("Clean Code")))
+				.andExpect(jsonPath("$.data.books[0].chapters", hasSize(2)))
+				.andExpect(jsonPath("$.data.books[0].chapters[0].chapterTitle", is("Chapter 1")))
+				.andExpect(jsonPath("$.data.books[0].chapters[0].status", notNullValue()));
 	}
 
 	@Test
@@ -385,7 +460,48 @@ class BeyondThePageIntegrationTest {
 				.andExpect(jsonPath("$.data", hasSize(1)))
 				.andExpect(jsonPath("$.data[0].bookName", is("Clean Code")))
 				.andExpect(jsonPath("$.data[0].completedPages", is(0)))
-				.andExpect(jsonPath("$.data[0].status", notNullValue()));
+				.andExpect(jsonPath("$.data[0].status", notNullValue()))
+				.andExpect(jsonPath("$.data[0].plannedPageRangeStart", notNullValue()))
+				.andExpect(jsonPath("$.data[0].plannedPageRangeEnd", notNullValue()));
+	}
+
+	@Test
+	void shouldExcludeBooksNotYetStartedFromDailyDashboard() throws Exception {
+		mockMvc.perform(get("/api/dashboard/daily?date=2026-06-30"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", hasSize(0)));
+	}
+
+	@Test
+	void shouldExcludeNotStartedBooksAfterTargetEndDateFromDailyDashboard() throws Exception {
+		mockMvc.perform(get("/api/dashboard/daily?date=2026-07-12"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", hasSize(0)));
+	}
+
+	@Test
+	void shouldIncludeOverdueBooksInDailyDashboard() throws Exception {
+		mockMvc.perform(put("/api/books/Clean Code/progress")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{ \"completedPages\": 50 }"))
+				.andExpect(status().isOk());
+
+		mockMvc.perform(get("/api/dashboard/daily?date=2026-07-12"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", hasSize(1)))
+				.andExpect(jsonPath("$.data[0].status", is("OVERDUE")));
+	}
+
+	@Test
+	void shouldExcludeCompletedBooksFromDailyDashboard() throws Exception {
+		mockMvc.perform(put("/api/books/Clean Code/progress")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{ \"completedPages\": 100 }"))
+				.andExpect(status().isOk());
+
+		mockMvc.perform(get("/api/dashboard/daily?date=2026-07-06"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", hasSize(0)));
 	}
 
 	@Test
@@ -402,5 +518,26 @@ class BeyondThePageIntegrationTest {
 		mockMvc.perform(get("/api/dashboard/daily?date=not-a-date"))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.status", is("ERROR")));
+	}
+
+	@Test
+	void shouldDeleteBookAndAllRelatedData() throws Exception {
+		mockMvc.perform(delete("/api/books/Clean Code"))
+				.andExpect(status().isNoContent());
+
+		mockMvc.perform(get("/api/books/Clean Code"))
+				.andExpect(status().isNotFound());
+
+		mockMvc.perform(get("/api/books"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", hasSize(0)));
+	}
+
+	@Test
+	void shouldReturn404WhenDeletingNonExistentBook() throws Exception {
+		mockMvc.perform(delete("/api/books/Unknown Book"))
+				.andExpect(status().isNotFound())
+				.andExpect(jsonPath("$.status", is("ERROR")))
+				.andExpect(jsonPath("$.message", is("Book not found: Unknown Book")));
 	}
 }

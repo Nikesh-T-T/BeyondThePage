@@ -1,6 +1,7 @@
 package com.beyondthepage.dto.response;
 
 import java.time.LocalDate;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,4 +17,5 @@ public class WeeklyDashboardResponse {
 	private int chaptersNotStarted;
 	private int totalPlannedPages;
 	private int totalCompletedPages;
+	private List<WeeklyBookChapterResponse> books;
 }

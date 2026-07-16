@@ -135,6 +135,10 @@ class DashboardServiceTest {
 		assertNotNull(response);
 		assertEquals(LocalDate.of(2026, 7, 6), response.getWeekStartDate());
 		assertEquals(LocalDate.of(2026, 7, 12), response.getWeekEndDate());
+		assertNotNull(response.getBooks());
+		assertEquals(1, response.getBooks().size());
+		assertEquals("Test Book", response.getBooks().get(0).getBookName());
+		assertEquals(2, response.getBooks().get(0).getChapters().size());
 	}
 
 	@Test
@@ -156,6 +160,58 @@ class DashboardServiceTest {
 		assertEquals(30, responses.get(0).getCompletedPages());
 		assertEquals(-20.0, responses.get(0).getVariancePages());
 		assertEquals(BookStatus.AT_RISK, responses.get(0).getStatus());
+		assertEquals(31, responses.get(0).getPlannedPageRangeStart());
+		assertEquals(50, responses.get(0).getPlannedPageRangeEnd());
+	}
+
+	@Test
+	void shouldExcludeBooksNotYetStartedFromDailyDashboard() {
+		Book book = createBookWithProgress(100, 10, LocalDate.of(2026, 8, 1), 0);
+		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
+
+		List<DailyBookProgressResponse> responses = dashboardService.getDailyDashboard(LocalDate.of(2026, 7, 6));
+
+		assertEquals(0, responses.size());
+	}
+
+	@Test
+	void shouldExcludeNotStartedBooksAfterTargetEndDateFromDailyDashboard() {
+		Book book = createBookWithProgress(100, 10, LocalDate.of(2026, 6, 1), 0);
+		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
+		when(progressCalculationService.computeTargetEndDate(book.getStartDate(), book.getPlannedDays()))
+				.thenReturn(LocalDate.of(2026, 6, 11));
+
+		List<DailyBookProgressResponse> responses = dashboardService.getDailyDashboard(LocalDate.of(2026, 7, 6));
+
+		assertEquals(0, responses.size());
+	}
+
+	@Test
+	void shouldIncludeOverdueBooksInDailyDashboard() {
+		Book book = createBookWithProgress(100, 10, LocalDate.of(2026, 6, 1), 80);
+		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
+		LocalDate requestDate = LocalDate.of(2026, 7, 6);
+		LocalDate targetEndDate = LocalDate.of(2026, 6, 11);
+		when(progressCalculationService.computeTargetEndDate(book.getStartDate(), book.getPlannedDays()))
+				.thenReturn(targetEndDate);
+		when(progressCalculationService.computeExpectedPagesByDate(book, requestDate)).thenReturn(100.0);
+		when(progressCalculationService.resolveBookStatus(80, 100, 100.0, targetEndDate, requestDate))
+				.thenReturn(BookStatus.OVERDUE);
+
+		List<DailyBookProgressResponse> responses = dashboardService.getDailyDashboard(requestDate);
+
+		assertEquals(1, responses.size());
+		assertEquals(BookStatus.OVERDUE, responses.get(0).getStatus());
+	}
+
+	@Test
+	void shouldExcludeCompletedBooksFromDailyDashboard() {
+		Book book = createBookWithProgress(100, 10, LocalDate.of(2026, 7, 1), 100);
+		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
+
+		List<DailyBookProgressResponse> responses = dashboardService.getDailyDashboard(LocalDate.of(2026, 7, 6));
+
+		assertEquals(0, responses.size());
 	}
 
 	@Test

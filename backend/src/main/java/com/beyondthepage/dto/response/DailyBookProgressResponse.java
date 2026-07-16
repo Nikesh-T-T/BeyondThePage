@@ -15,4 +15,6 @@ public class DailyBookProgressResponse {
 	private double variancePages;
 	private BookStatus status;
 	private boolean hasCoverImage;
+	private int plannedPageRangeStart;
+	private int plannedPageRangeEnd;
 }

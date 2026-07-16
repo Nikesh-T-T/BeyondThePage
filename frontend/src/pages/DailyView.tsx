@@ -77,10 +77,8 @@ const DailyView: React.FC = () => {
     }
   };
 
-  const activeBooks = data.filter(b => b.status !== 'COMPLETED' && b.status !== 'NOT_STARTED');
-  const onTrack = data.filter(b => b.status === 'ON_TRACK' || b.status === 'AT_RISK').length;
+  const activeBooks = data;
   const totalBooks = activeBooks.length;
-  const pct = totalBooks > 0 ? Math.round((onTrack / totalBooks) * 100) : 0;
 
   return (
     <div className="min-h-screen">
@@ -124,42 +122,64 @@ const DailyView: React.FC = () => {
             <span className="material-symbols-outlined animate-spin text-primary text-[48px]">autorenew</span>
           </div>
         ) : (
-          <div className="grid grid-cols-12 gap-lg">
-            {/* Main Column */}
-            <div className="col-span-12 lg:col-span-8 space-y-lg">
-              <div className="flex items-end justify-between">
-                <h3 className="text-headline-lg-mobile font-semibold text-primary">Daily Reading List</h3>
-                {totalBooks > 0 && (
-                  <div className="bg-surface-container-low px-md py-sm rounded-xl border border-outline-variant flex items-center gap-md">
-                    <div className="relative w-14 h-14 flex items-center justify-center">
-                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 48 48">
-                        <circle cx="24" cy="24" fill="transparent" r="18" stroke="#e5e3d7" strokeWidth="4" />
-                        <circle
-                          cx="24" cy="24" fill="transparent" r="18"
-                          stroke="#605e55" strokeWidth="4"
-                          strokeDasharray={`${2 * Math.PI * 18}`}
-                          strokeDashoffset={`${2 * Math.PI * 18 * (1 - pct / 100)}`}
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <span className="absolute text-[9px] font-bold text-primary">{pct}%</span>
-                    </div>
-                    <div>
-                      <p className="font-label-caps text-[10px] text-on-surface-variant">DAILY STATUS</p>
-                      <p className="text-[13px] font-bold text-primary">{onTrack} of {totalBooks} on track</p>
-                    </div>
-                  </div>
-                )}
+          <>
+            {/* Stats Bento Grid */}
+            <section className="grid grid-cols-1 md:grid-cols-12 gap-lg">
+              <div className="md:col-span-8 card p-lg flex items-center justify-between">
+                <div>
+                  <h3 className="text-h2 font-semibold mb-1">Daily Reading Target</h3>
+                  <p className="text-body-sm text-on-surface-variant">
+                    {totalBooks} book{totalBooks !== 1 ? 's' : ''} active today
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="text-headline-xl font-bold text-primary leading-none">
+                    {data.filter(b => b.completedPages >= b.plannedPageRangeEnd).length}
+                  </span>
+                  <span className="text-h2 text-on-surface-variant">/ {totalBooks}</span>
+                  <p className="font-label-caps text-label-caps text-on-surface-variant">ON TRACK</p>
+                </div>
               </div>
 
-              {data.length === 0 ? (
+              <div className="md:col-span-4 grid grid-rows-2 gap-lg">
+                <div className="card p-lg flex items-center gap-lg">
+                  <div className="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center text-primary">
+                    <span className="material-symbols-outlined">menu_book</span>
+                  </div>
+                  <div>
+                    <p className="font-label-caps text-label-caps text-on-surface-variant">PAGES READ</p>
+                    <p className="text-h2 font-semibold">
+                      {data.reduce((sum, b) => sum + b.completedPages, 0)} / {data.reduce((sum, b) => sum + Math.ceil(b.plannedPagesByDate), 0)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="card p-lg flex items-center gap-lg">
+                  <div className="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                    <span className="material-symbols-outlined">priority_high</span>
+                  </div>
+                  <div>
+                    <p className="font-label-caps text-label-caps text-on-surface-variant">OVERDUE</p>
+                    <p className={`text-h2 font-semibold ${data.filter(b => b.status === 'OVERDUE').length > 0 ? 'text-error' : ''}`}>
+                      {data.filter(b => b.status === 'OVERDUE').length} books
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          <div className="space-y-lg">
+            <div className="space-y-lg">
+              <h3 className="text-headline-lg-mobile font-semibold text-primary">Daily Reading List</h3>
+
+              {totalBooks === 0 ? (
                 <div className="card p-xl text-center">
                   <span className="material-symbols-outlined text-[48px] text-outline-variant mb-md block">menu_book</span>
                   <p className="text-on-surface-variant text-body-md">No books to track for this date.</p>
                 </div>
               ) : (
                 <div className="space-y-md">
-                  {data.map(book => {
+                  {activeBooks.map(book => {
                     const pctDone = book.plannedPagesByDate > 0
                       ? Math.min(100, Math.round((book.completedPages / book.plannedPagesByDate) * 100))
                       : book.completedPages > 0 ? 100 : 0;
@@ -186,9 +206,17 @@ const DailyView: React.FC = () => {
                           </div>
                           <div className="mt-md">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-body-sm text-on-surface-variant">
-                                {book.completedPages} / {Math.round(book.plannedPagesByDate)} planned pages
-                              </span>
+                              {book.completedPages >= book.plannedPageRangeEnd ? (
+                                <span className="inline-flex items-center gap-1 px-sm py-xs rounded-full bg-primary/10 text-primary text-[11px] font-semibold">
+                                  <span className="material-symbols-outlined text-[13px]">check_circle</span>
+                                  On track · up to p.{book.plannedPageRangeEnd}
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-semibold">
+                                  <span className="material-symbols-outlined text-[13px]">bookmark</span>
+                                  p.{book.plannedPageRangeStart}–{book.plannedPageRangeEnd}
+                                </span>
+                              )}
                               <span className={`text-[12px] font-bold ${isOverdue ? 'text-error' : 'text-primary'}`}>
                                 {pctDone}%
                               </span>
@@ -220,33 +248,8 @@ const DailyView: React.FC = () => {
               )}
             </div>
 
-            {/* Sidebar Stats */}
-            <div className="col-span-12 lg:col-span-4 space-y-lg">
-              <div className="bg-primary-fixed text-on-primary-fixed p-lg rounded-xl shadow-lg">
-                <div className="flex justify-between items-center mb-md">
-                  <h3 className="font-label-caps text-[11px] opacity-70 tracking-widest">TODAY'S OVERVIEW</h3>
-                  <span className="material-symbols-outlined text-[20px] opacity-60">trending_up</span>
-                </div>
-                <div className="flex items-baseline gap-2 mb-sm">
-                  <span className="text-headline-xl font-bold leading-none">{totalBooks}</span>
-                  <span className="text-[16px] font-medium opacity-70">active books</span>
-                </div>
-                <div className="w-full h-2 bg-on-primary-fixed/15 rounded-full mb-lg">
-                  <div className="h-full bg-on-primary-fixed rounded-full" style={{ width: `${pct}%` }} />
-                </div>
-                <div className="grid grid-cols-2 gap-md">
-                  <div className="bg-on-primary-fixed/10 p-md rounded-lg border border-on-primary-fixed/10">
-                    <p className="text-[10px] font-bold opacity-60 mb-1 uppercase">On Track</p>
-                    <p className="text-[22px] font-bold">{onTrack}</p>
-                  </div>
-                  <div className="bg-on-primary-fixed/10 p-md rounded-lg border border-on-primary-fixed/10">
-                    <p className="text-[10px] font-bold opacity-60 mb-1 uppercase">Overdue</p>
-                    <p className="text-[22px] font-bold">{data.filter(b => b.status === 'OVERDUE').length}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
+          </>
         )}
       </div>
 

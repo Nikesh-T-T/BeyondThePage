@@ -12,6 +12,7 @@ public class BookDetailResponse {
 
 	private String bookName;
 	private String category;
+	private String author;
 	private int totalPages;
 	private int plannedDays;
 	private LocalDate startDate;

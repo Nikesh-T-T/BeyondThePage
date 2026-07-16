@@ -107,7 +107,7 @@ backend/
 
 ## Database Structure
 
-Schema is managed by Flyway (`V1__init.sql`, `V2__add_cover_image.sql`). The application uses `ddl-auto=validate` — Hibernate validates against the schema but never modifies it.
+Schema is managed by Flyway (`V1__init.sql`, `V2__add_cover_image.sql`, `V3__add_category.sql`, `V4__add_author.sql`). The application uses `ddl-auto=validate` — Hibernate validates against the schema but never modifies it.
 
 ### `books`
 
@@ -117,6 +117,8 @@ Schema is managed by Flyway (`V1__init.sql`, `V2__add_cover_image.sql`). The app
 | `total_pages` | `INT` | NOT NULL, > 0 |
 | `planned_days` | `INT` | NOT NULL, > 0 |
 | `start_date` | `DATE` | NOT NULL |
+| `category` | `VARCHAR(100)` | NOT NULL |
+| `author` | `VARCHAR(255)` | NOT NULL |
 | `cover_image` | `BYTEA` | NULL |
 | `cover_image_type` | `VARCHAR(50)` | NULL |
 
@@ -171,6 +173,8 @@ All responses are wrapped in a consistent envelope:
 ```json
 {
   "bookName": "Clean Code",
+  "category": "Technology",
+  "author": "Robert C. Martin",
   "totalPages": 431,
   "plannedDays": 30,
   "startDate": "2026-07-01",
@@ -185,6 +189,8 @@ All responses are wrapped in a consistent envelope:
 | Field | Type | Required | Validation |
 |-------|------|----------|------------|
 | `bookName` | string | yes | not blank |
+| `category` | string | yes | not blank |
+| `author` | string | yes | not blank |
 | `totalPages` | int | yes | > 0 |
 | `plannedDays` | int | yes | > 0 |
 | `startDate` | date (`yyyy-MM-dd`) | yes | not null |
@@ -207,6 +213,8 @@ Chapter validation (service layer):
   "message": "Book created successfully",
   "data": {
     "bookName": "Clean Code",
+    "category": "Technology",
+    "author": "Robert C. Martin",
     "totalPages": 431,
     "plannedDays": 30,
     "startDate": "2026-07-01",
@@ -222,6 +230,8 @@ curl -X POST http://localhost:8080/api/books \
   -H "Content-Type: application/json" \
   -d '{
     "bookName": "Clean Code",
+    "category": "Technology",
+    "author": "Robert C. Martin",
     "totalPages": 431,
     "plannedDays": 30,
     "startDate": "2026-07-01",
@@ -247,6 +257,8 @@ No request body or parameters.
   "data": [
     {
       "bookName": "Clean Code",
+      "category": "Technology",
+      "author": "Robert C. Martin",
       "totalPages": 431,
       "plannedDays": 30,
       "startDate": "2026-07-01",
@@ -282,6 +294,8 @@ curl http://localhost:8080/api/books
   "message": "Book details fetched successfully",
   "data": {
     "bookName": "Clean Code",
+    "category": "Technology",
+    "author": "Robert C. Martin",
     "totalPages": 431,
     "plannedDays": 30,
     "startDate": "2026-07-01",
@@ -347,6 +361,26 @@ curl "http://localhost:8080/api/books/Clean%20Code"
 curl -X PUT "http://localhost:8080/api/books/Clean%20Code/progress" \
   -H "Content-Type: application/json" \
   -d '{"completedPages": 150}'
+```
+
+---
+
+#### `DELETE /api/books/{bookName}` — Delete a book
+
+Permanently removes the book and all related data (chapters and reading progress).
+
+**Path parameter:** `bookName`
+
+**Response — `204 No Content`** (no body)
+
+**Error — `404 Not Found`**
+```json
+{ "status": "ERROR", "message": "Book not found: Clean Code" }
+```
+
+**curl example**
+```bash
+curl -X DELETE "http://localhost:8080/api/books/Clean%20Code"
 ```
 
 ---
@@ -471,10 +505,22 @@ curl "http://localhost:8080/api/dashboard/monthly?month=2026-07"
     "chaptersOverdue":   0,
     "chaptersNotStarted": 2,
     "totalPlannedPages":   130,
-    "totalCompletedPages": 45
+    "totalCompletedPages": 45,
+    "books": [
+      {
+        "bookName": "Clean Code",
+        "category": "Technology",
+        "chapters": [
+          { "chapterNumber": 1, "chapterTitle": "Clean Code",      "startPage": 1,  "endPage": 50,  "status": "COMPLETED"    },
+          { "chapterNumber": 2, "chapterTitle": "Meaningful Names", "startPage": 51, "endPage": 120, "status": "IN_PROGRESS"  }
+        ]
+      }
+    ]
   }
 }
 ```
+
+> `books` contains one entry per book that has at least one chapter falling within the week window. Each chapter entry includes its status computed at the time of the request.
 
 **Error — `400`** if `date` cannot be parsed as `yyyy-MM-dd`.
 
@@ -497,22 +543,26 @@ curl "http://localhost:8080/api/dashboard/weekly?date=2026-06-19"
   "data": [
     {
       "bookName": "Clean Code",
+      "totalPages": 431,
       "plannedPagesByDate": 143.7,
       "completedPages": 120,
       "variancePages": -23.7,
-      "status": "AT_RISK"
+      "status": "AT_RISK",
+      "hasCoverImage": true,
+      "plannedPageRangeStart": 121,
+      "plannedPageRangeEnd": 144
     }
   ]
 }
 ```
 
-> Returns one entry per book. `variancePages` is `completedPages - plannedPagesByDate` (negative means behind).
+> Only books whose reading window covers the requested date (`startDate <= date <= targetEndDate`) and are not yet completed are returned. `plannedPageRangeStart` is `completedPages + 1`; `plannedPageRangeEnd` is `ceil(plannedPagesByDate)` capped at `totalPages`. Together they show which pages are pending up to today's plan target. `variancePages` is `completedPages - plannedPagesByDate` (negative means behind).
 
 **Error — `400`** if `date` cannot be parsed as `yyyy-MM-dd`.
 
 **curl example**
 ```bash
-curl "http://localhost:8080/api/dashboard/daily?date=2026-06-19"
+curl "http://localhost:8080/api/dashboard/daily?date=2026-07-17"
 ```
 
 ---

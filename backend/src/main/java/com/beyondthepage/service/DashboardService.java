@@ -3,6 +3,7 @@ package com.beyondthepage.service;
 import com.beyondthepage.dto.response.DailyBookProgressResponse;
 import com.beyondthepage.dto.response.DashboardSummaryResponse;
 import com.beyondthepage.dto.response.MonthlyDashboardResponse;
+import com.beyondthepage.dto.response.WeeklyBookChapterResponse;
 import com.beyondthepage.dto.response.WeeklyDashboardResponse;
 import com.beyondthepage.entity.Book;
 import com.beyondthepage.entity.BookChapter;
@@ -12,6 +13,7 @@ import com.beyondthepage.repository.BookRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,6 +118,7 @@ public class DashboardService {
 		int chaptersNotStarted = 0;
 		int totalPlannedPages = 0;
 		int totalCompletedPages = 0;
+		List<WeeklyBookChapterResponse> bookEntries = new ArrayList<>();
 
 		for (Book book : books) {
 			int completedPages = book.getReadingProgress().getCompletedPages();
@@ -128,6 +131,8 @@ public class DashboardService {
 					book, weekStart.minusDays(1));
 			totalPlannedPages += (int) Math.max(0, expectedAtWeekEnd - expectedAtWeekStart);
 			totalCompletedPages += completedPages;
+
+			List<WeeklyBookChapterResponse.ChapterEntry> chapterEntries = new ArrayList<>();
 
 			for (BookChapter chapter : book.getChapters()) {
 				long dayChapterShouldEnd = (long) Math.ceil(chapter.getEndPage() / plannedDailyPages);
@@ -148,7 +153,22 @@ public class DashboardService {
 					} else if (chapterStatus == ChapterStatus.NOT_STARTED) {
 						chaptersNotStarted++;
 					}
+					chapterEntries.add(WeeklyBookChapterResponse.ChapterEntry.builder()
+							.chapterNumber(chapter.getChapterId().getChapterNumber())
+							.chapterTitle(chapter.getChapterTitle())
+							.startPage(chapter.getStartPage())
+							.endPage(chapter.getEndPage())
+							.status(chapterStatus)
+							.build());
 				}
+			}
+
+			if (!chapterEntries.isEmpty()) {
+				bookEntries.add(WeeklyBookChapterResponse.builder()
+						.bookName(book.getBookName())
+						.category(book.getCategory())
+						.chapters(chapterEntries)
+						.build());
 			}
 		}
 
@@ -161,6 +181,7 @@ public class DashboardService {
 				.chaptersNotStarted(chaptersNotStarted)
 				.totalPlannedPages(totalPlannedPages)
 				.totalCompletedPages(totalCompletedPages)
+				.books(bookEntries)
 				.build();
 	}
 
@@ -169,6 +190,14 @@ public class DashboardService {
 		List<Book> books = bookRepository.findAllWithProgress();
 
 		return books.stream()
+				.filter(book -> !date.isBefore(book.getStartDate()))
+				.filter(book -> book.getReadingProgress().getCompletedPages() < book.getTotalPages())
+				.filter(book -> {
+					LocalDate targetEndDate = progressCalculationService.computeTargetEndDate(
+							book.getStartDate(), book.getPlannedDays());
+					return !date.isAfter(targetEndDate)
+							|| book.getReadingProgress().getCompletedPages() > 0;
+				})
 				.map(book -> {
 					int completedPages = book.getReadingProgress().getCompletedPages();
 					LocalDate targetEndDate = progressCalculationService.computeTargetEndDate(
@@ -177,6 +206,8 @@ public class DashboardService {
 					double variance = completedPages - expectedByDate;
 					BookStatus status = progressCalculationService.resolveBookStatus(completedPages,
 							book.getTotalPages(), expectedByDate, targetEndDate, date);
+					int rangeStart = completedPages + 1;
+					int rangeEnd = (int) Math.min(Math.ceil(expectedByDate), book.getTotalPages());
 
 					return DailyBookProgressResponse.builder()
 							.bookName(book.getBookName())
@@ -186,6 +217,8 @@ public class DashboardService {
 							.variancePages(variance)
 							.status(status)
 							.hasCoverImage(book.getCoverImage() != null)
+							.plannedPageRangeStart(rangeStart)
+							.plannedPageRangeEnd(rangeEnd)
 							.build();
 				})
 				.toList();
