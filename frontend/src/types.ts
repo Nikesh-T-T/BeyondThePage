@@ -93,7 +93,8 @@ export interface DailyBookProgress {
 
 export interface CreateBookRequest {
   bookName: string;
-  category?: string;
+  category: string;
+  author: string;
   totalPages: number;
   plannedDays: number;
   startDate: string;

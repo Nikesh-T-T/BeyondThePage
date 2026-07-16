@@ -13,6 +13,7 @@ interface ChapterRow {
 const AddBook: React.FC = () => {
   const navigate = useNavigate();
   const [bookName, setBookName] = useState('');
+  const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('');
   const [totalPages, setTotalPages] = useState('');
   const [plannedDays, setPlannedDays] = useState('');
@@ -52,14 +53,38 @@ const AddBook: React.FC = () => {
     setChapters(c => c.map((ch, i) => (i === idx ? { ...ch, [field]: value } : ch)));
   };
 
+  const validate = (): string | null => {
+    if (!bookName.trim()) return 'Book title is required.';
+    if (!author.trim()) return 'Author is required.';
+    if (!category.trim()) return 'Category is required.';
+    const pages = parseInt(totalPages, 10);
+    if (!totalPages || isNaN(pages) || pages < 1) return 'Total pages must be at least 1.';
+    const days = parseInt(plannedDays, 10);
+    if (!plannedDays || isNaN(days) || days < 1) return 'Planned days must be at least 1.';
+    if (!startDate) return 'Start date is required.';
+    if (chapters.length === 0) return 'At least one chapter is required.';
+    for (const ch of chapters) {
+      if (!ch.chapterTitle.trim()) return `Chapter ${ch.chapterNumber} title is required.`;
+      if (!ch.startPage || !ch.endPage) return `Chapter ${ch.chapterNumber} page range is required.`;
+      if (parseInt(ch.endPage, 10) < parseInt(ch.startPage, 10)) return `Chapter ${ch.chapterNumber} end page must be >= start page.`;
+    }
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
     setSaving(true);
     try {
       const created = await createBook({
         bookName,
-        category: category || undefined,
+        author,
+        category,
         totalPages: parseInt(totalPages, 10),
         plannedDays: parseInt(plannedDays, 10),
         startDate,
@@ -104,7 +129,6 @@ const AddBook: React.FC = () => {
               <label className="block font-label-caps text-label-caps text-on-surface-variant">BOOK TITLE</label>
               <input
                 type="text"
-                required
                 value={bookName}
                 onChange={e => setBookName(e.target.value)}
                 placeholder="e.g. Clean Code"
@@ -113,7 +137,18 @@ const AddBook: React.FC = () => {
             </div>
 
             <div className="space-y-xs">
-              <label className="block font-label-caps text-label-caps text-on-surface-variant">CATEGORY <span className="normal-case text-[10px]">(optional)</span></label>
+              <label className="block font-label-caps text-label-caps text-on-surface-variant">AUTHOR</label>
+              <input
+                type="text"
+                value={author}
+                onChange={e => setAuthor(e.target.value)}
+                placeholder="e.g. Robert C. Martin"
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+
+            <div className="space-y-xs">
+              <label className="block font-label-caps text-label-caps text-on-surface-variant">CATEGORY</label>
               <input
                 type="text"
                 value={category}
@@ -128,7 +163,6 @@ const AddBook: React.FC = () => {
                 <label className="block font-label-caps text-label-caps text-on-surface-variant">TOTAL PAGES</label>
                 <input
                   type="number"
-                  required
                   min={1}
                   value={totalPages}
                   onChange={e => setTotalPages(e.target.value)}
@@ -141,7 +175,6 @@ const AddBook: React.FC = () => {
                 <label className="block font-label-caps text-label-caps text-on-surface-variant">PLANNED DAYS</label>
                 <input
                   type="number"
-                  required
                   min={1}
                   value={plannedDays}
                   onChange={e => setPlannedDays(e.target.value)}
@@ -154,7 +187,6 @@ const AddBook: React.FC = () => {
                 <label className="block font-label-caps text-label-caps text-on-surface-variant">START DATE</label>
                 <input
                   type="date"
-                  required
                   value={startDate}
                   onChange={e => setStartDate(e.target.value)}
                   className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -223,7 +255,6 @@ const AddBook: React.FC = () => {
                       <label className="block font-label-caps text-[10px] text-on-surface-variant">TITLE</label>
                       <input
                         type="text"
-                        required
                         value={ch.chapterTitle}
                         onChange={e => updateChapter(idx, 'chapterTitle', e.target.value)}
                         placeholder="Chapter title"
@@ -234,7 +265,6 @@ const AddBook: React.FC = () => {
                       <label className="block font-label-caps text-[10px] text-on-surface-variant">START PAGE</label>
                       <input
                         type="number"
-                        required
                         min={1}
                         value={ch.startPage}
                         onChange={e => updateChapter(idx, 'startPage', e.target.value)}
@@ -245,7 +275,6 @@ const AddBook: React.FC = () => {
                       <label className="block font-label-caps text-[10px] text-on-surface-variant">END PAGE</label>
                       <input
                         type="number"
-                        required
                         min={1}
                         value={ch.endPage}
                         onChange={e => updateChapter(idx, 'endPage', e.target.value)}
