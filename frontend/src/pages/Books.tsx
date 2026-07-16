@@ -90,6 +90,9 @@ const Books: React.FC = () => {
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(book);
   }
+  for (const key of Object.keys(grouped)) {
+    grouped[key].sort((a, b) => a.startDate.localeCompare(b.startDate));
+  }
   const categories = Object.keys(grouped).sort((a, b) => {
     if (a === UNCATEGORIZED) return 1;
     if (b === UNCATEGORIZED) return -1;
