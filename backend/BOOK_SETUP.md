@@ -385,24 +385,26 @@ curl -X POST "http://localhost:8080/api/books" \
 curl -X POST "http://localhost:8080/api/books" \
   -H "Content-Type: application/json" \
   -d '{
-    "bookName": "Docker Deep Dive",
+    "bookName": "Docker In Action",
     "category": "DevOps",
-    "author": "Nigel Poulton",
-    "totalPages": 200,
-    "plannedDays": 24,
+    "author": "Jeff Nickoloff, Stephen Kuenzli",
+    "totalPages": 301,
+    "plannedDays": 30,
     "startDate": "2026-10-06",
     "chapters": [
-      { "chapterNumber": 1,  "chapterTitle": "Containers from 30,000 feet", "startPage": 1,   "endPage": 18 },
-      { "chapterNumber": 2,  "chapterTitle": "Docker", "startPage": 19,  "endPage": 34 },
-      { "chapterNumber": 3,  "chapterTitle": "Installing Docker", "startPage": 35,  "endPage": 50 },
-      { "chapterNumber": 4,  "chapterTitle": "The big picture", "startPage": 51,  "endPage": 68 },
-      { "chapterNumber": 5,  "chapterTitle": "The Docker Engine", "startPage": 69,  "endPage": 84 },
-      { "chapterNumber": 6,  "chapterTitle": "Images", "startPage": 85,  "endPage": 106 },
-      { "chapterNumber": 7,  "chapterTitle": "Containers", "startPage": 107, "endPage": 126 },
-      { "chapterNumber": 8,  "chapterTitle": "Containerizing an app", "startPage": 127, "endPage": 148 },
-      { "chapterNumber": 9,  "chapterTitle": "Deploying apps with Docker Compose", "startPage": 149, "endPage": 168 },
-      { "chapterNumber": 10, "chapterTitle": "Docker Swarm", "startPage": 169, "endPage": 184 },
-      { "chapterNumber": 11, "chapterTitle": "Docker networking", "startPage": 185, "endPage": 200 }
+      { "chapterNumber": 1,  "chapterTitle": "Welcome to Docker", "startPage": 1,   "endPage": 18 },
+      { "chapterNumber": 2,  "chapterTitle": "Running software in containers", "startPage": 19,  "endPage": 46 },
+      { "chapterNumber": 3,  "chapterTitle": "Software installation simplified", "startPage": 47,  "endPage": 61 },
+      { "chapterNumber": 4,  "chapterTitle": "Working with storage and volumes", "startPage": 62,  "endPage": 79 },
+      { "chapterNumber": 5,  "chapterTitle": "Single-host networking", "startPage": 80,  "endPage": 98 },
+      { "chapterNumber": 6,  "chapterTitle": "Limiting risk with resource controls", "startPage": 99,  "endPage": 122 },
+      { "chapterNumber": 7,  "chapterTitle": "Packaging software in images", "startPage": 125, "endPage": 143 },
+      { "chapterNumber": 8,  "chapterTitle": "Building images automatically with Dockerfiles", "startPage": 144, "endPage": 173 },
+      { "chapterNumber": 9,  "chapterTitle": "Public and private software distribution", "startPage": 174, "endPage": 196 },
+      { "chapterNumber": 10, "chapterTitle": "Image pipelines", "startPage": 197, "endPage": 216 },
+      { "chapterNumber": 11, "chapterTitle": "Services with Docker and Compose", "startPage": 219, "endPage": 243 },
+      { "chapterNumber": 12, "chapterTitle": "First-class configuration abstractions", "startPage": 244, "endPage": 263 },
+      { "chapterNumber": 13, "chapterTitle": "Orchestrating services on a cluster of Docker hosts with Swarm", "startPage": 264, "endPage": 300 }
     ]
   }'
 ```
