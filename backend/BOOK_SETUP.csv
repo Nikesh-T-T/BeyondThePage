@@ -12,7 +12,7 @@ book_name,category,author,total_pages,planned_days,start_date
 "Machine Learning: The Art and Science of Algorithms that Make Sense of Data","Machine Learning","Peter Flach",383,68,2026-11-09
 "The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win","DevOps","Gene Kim",432,52,2026-07-17
 "Lean DevOps: Building and Scaling High Performing Technology Organizations","DevOps","Nicole Forsgren",240,29,2026-09-07
-"Docker Deep Dive","DevOps","Nigel Poulton",200,24,2026-10-06
+"Docker In Action","DevOps","Jeff Nickoloff, Stephen Kuenzli",301,30,2026-10-06
 "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications","DevOps","Chip Huyen",644,78,2026-10-30
 "System Design Interview: An Insider Guide Volume 1","System Design","Alex Xu",298,80,2026-07-17
 "System Design Interview: An Insider Guide Volume 2","System Design","Alex Xu",387,103,2026-10-05
@@ -185,17 +185,19 @@ book_name,chapter_number,chapter_title,start_page,end_page
 "Lean DevOps: Building and Scaling High Performing Technology Organizations",4,"Transformational Leadership",141,180
 "Lean DevOps: Building and Scaling High Performing Technology Organizations",5,"The Science",181,220
 "Lean DevOps: Building and Scaling High Performing Technology Organizations",6,"Conclusion",221,240
-"Docker Deep Dive",1,"Containers from 30,000 feet",1,18
-"Docker Deep Dive",2,"Docker",19,34
-"Docker Deep Dive",3,"Installing Docker",35,50
-"Docker Deep Dive",4,"The big picture",51,68
-"Docker Deep Dive",5,"The Docker Engine",69,84
-"Docker Deep Dive",6,"Images",85,106
-"Docker Deep Dive",7,"Containers",107,126
-"Docker Deep Dive",8,"Containerizing an app",127,148
-"Docker Deep Dive",9,"Deploying apps with Docker Compose",149,168
-"Docker Deep Dive",10,"Docker Swarm",169,184
-"Docker Deep Dive",11,"Docker networking",185,200
+"Docker In Action",1,"Welcome to Docker",1,18
+"Docker In Action",2,"Running software in containers",19,46
+"Docker In Action",3,"Software installation simplified",47,61
+"Docker In Action",4,"Working with storage and volumes",62,79
+"Docker In Action",5,"Single-host networking",80,98
+"Docker In Action",6,"Limiting risk with resource controls",99,122
+"Docker In Action",7,"Packaging software in images",125,143
+"Docker In Action",8,"Building images automatically with Dockerfiles",144,173
+"Docker In Action",9,"Public and private software distribution",174,196
+"Docker In Action",10,"Image pipelines",197,216
+"Docker In Action",11,"Services with Docker and Compose",219,243
+"Docker In Action",12,"First-class configuration abstractions",244,263
+"Docker In Action",13,"Orchestrating services on a cluster of Docker hosts with Swarm",264,300
 "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications",1,"Overview of Machine Learning Systems",1,36
 "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications",2,"Introduction to Machine Learning Systems Design",37,80
 "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications",3,"Data Engineering Fundamentals",81,130
