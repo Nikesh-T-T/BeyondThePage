@@ -101,7 +101,10 @@ const BookDetailPage: React.FC = () => {
           <div className="lg:col-span-9 space-y-lg">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-md">
               <div>
-                <h1 className="text-h1 font-bold leading-none mb-3">{book.bookName}</h1>
+                <h1 className="text-h1 font-bold leading-none mb-1">{book.bookName}</h1>
+                {book.author && (
+                  <p className="text-body-md text-on-surface-variant mb-2">by {book.author}</p>
+                )}
                 <p className="text-body-md text-on-surface-variant">
                   {book.category && <span className="mr-2">{book.category} ·</span>}
                   Started {book.startDate} · Target {book.targetEndDate}

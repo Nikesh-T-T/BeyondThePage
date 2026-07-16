@@ -178,7 +178,7 @@ const DailyView: React.FC = () => {
                   <p className="text-on-surface-variant text-body-md">No books to track for this date.</p>
                 </div>
               ) : (
-                <div className="space-y-md">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-md">
                   {activeBooks.map(book => {
                     const pctDone = book.plannedPagesByDate > 0
                       ? Math.min(100, Math.round((book.completedPages / book.plannedPagesByDate) * 100))
@@ -188,54 +188,45 @@ const DailyView: React.FC = () => {
                     return (
                       <div
                         key={book.bookName}
-                        className="card p-lg flex items-center gap-lg cursor-pointer hover:translate-y-[-2px] transition-transform"
+                        className="card p-md flex flex-col gap-sm cursor-pointer hover:translate-y-[-2px] transition-transform"
                         onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
                       >
-                        <div className="flex-shrink-0 w-16 h-20 rounded bg-surface-container-high overflow-hidden flex items-center justify-center">
+                        <div className="w-full aspect-[2/3] rounded bg-surface-container-high overflow-hidden flex items-center justify-center">
                           {book.hasCoverImage
                             ? <img src={coverUrl(book.bookName)}
                                    alt={`${book.bookName} cover`}
                                    className="w-full h-full object-cover" />
-                            : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
+                            : <span className="material-symbols-outlined text-on-surface-variant text-[36px]">book</span>}
                         </div>
 
-                        <div className="flex-grow">
-                          <div className="flex justify-between items-start mb-2">
-                            <h3 className="text-[18px] font-bold text-primary leading-tight">{book.bookName}</h3>
-                            <StatusBadge status={book.status} />
-                          </div>
-                          <div className="mt-md">
-                            <div className="flex items-center justify-between mb-2">
-                              {book.completedPages >= book.plannedPageRangeEnd ? (
-                                <span className="inline-flex items-center gap-1 px-sm py-xs rounded-full bg-primary/10 text-primary text-[11px] font-semibold">
-                                  <span className="material-symbols-outlined text-[13px]">check_circle</span>
-                                  On track · up to p.{book.plannedPageRangeEnd}
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1 px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-semibold">
-                                  <span className="material-symbols-outlined text-[13px]">bookmark</span>
-                                  p.{book.plannedPageRangeStart}–{book.plannedPageRangeEnd}
-                                </span>
-                              )}
-                              <span className={`text-[12px] font-bold ${isOverdue ? 'text-error' : 'text-primary'}`}>
+                        <div className="flex-grow flex flex-col gap-xs">
+                          <h3 className="text-[13px] font-bold text-on-surface leading-tight min-h-[2.6em] line-clamp-2">{book.bookName}</h3>
+                          <StatusBadge status={book.status} />
+
+                          <div className="mt-auto space-y-xs">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[11px] text-on-surface-variant">
+                                p.{book.plannedPageRangeStart}–{book.plannedPageRangeEnd}
+                              </span>
+                              <span className={`text-[11px] font-bold ${isOverdue ? 'text-error' : 'text-primary'}`}>
                                 {pctDone}%
                               </span>
                             </div>
-                            <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+                            <div className="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
                               <div
                                 className={`h-full rounded-full ${isOverdue ? 'bg-error' : 'bg-secondary'}`}
                                 style={{ width: `${pctDone}%` }}
                               />
                             </div>
-                            <div className="mt-2 flex items-center justify-between">
-                              <span className={`text-[11px] font-semibold ${book.variancePages >= 0 ? 'text-secondary' : 'text-error'}`}>
-                                {book.variancePages >= 0 ? '+' : ''}{Math.round(book.variancePages)} pages vs plan
+                            <div className="flex items-center justify-between">
+                              <span className={`text-[10px] font-semibold ${book.variancePages >= 0 ? 'text-secondary' : 'text-error'}`}>
+                                {book.variancePages >= 0 ? '+' : ''}{Math.round(book.variancePages)} pg
                               </span>
                               <button
                                 onClick={e => openModal(book, e)}
-                                className="text-[11px] font-bold text-primary hover:underline flex items-center gap-1"
+                                className="text-[11px] font-bold text-primary hover:underline flex items-center gap-xs"
                               >
-                                <span className="material-symbols-outlined text-[14px]">edit</span>
+                                <span className="material-symbols-outlined text-[13px]">edit</span>
                                 Update
                               </button>
                             </div>

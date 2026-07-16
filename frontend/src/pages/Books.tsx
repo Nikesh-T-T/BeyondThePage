@@ -20,6 +20,9 @@ const BookRow: React.FC<{ book: BookSummary; onClick: () => void }> = ({ book, o
 
     <div className="flex-grow space-y-xs">
       <h4 className="text-[18px] font-semibold leading-tight text-on-surface">{book.bookName}</h4>
+      {book.author && (
+        <p className="text-body-sm text-on-surface-variant">by {book.author}</p>
+      )}
       <p className="text-body-sm text-on-surface-variant">
         Started {book.startDate} · Target {book.targetEndDate}
       </p>

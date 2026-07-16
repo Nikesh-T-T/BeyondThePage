@@ -95,6 +95,8 @@ Set these in the Render dashboard (or a local `.env` file for testing).
 | `DATABASE_PASSWORD` | Yes (prod) | — | PostgreSQL password |
 | `PORT` | No | `8080` | Server port (Render injects this automatically) |
 | `APP_CORS_ALLOWED_ORIGINS` | Yes (prod) | `*` | Allowed frontend origins, comma-separated (e.g., `https://beyond-the-page.onrender.com`) |
+| `HEALTHCHECK_ENABLED` | No | `false` | Set to `true` to enable the keep-alive scheduler (recommended on Render free tier) |
+| `HEALTHCHECK_SERVICE_URL` | No | — | Base URL the scheduler pings every 5 minutes (e.g., `https://your-backend.onrender.com`). Required when `HEALTHCHECK_ENABLED=true` |
 
 #### Render Web Service Settings
 
@@ -135,6 +137,8 @@ DATABASE_USERNAME=postgres.wqcfdrywormbpmpvuokk
 DATABASE_PASSWORD=your-secure-password
 PORT=8080
 APP_CORS_ALLOWED_ORIGINS=https://beyond-the-page.onrender.com
+HEALTHCHECK_ENABLED=true
+HEALTHCHECK_SERVICE_URL=https://your-backend.onrender.com
 ```
 
 #### Flyway Migrations
