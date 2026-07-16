@@ -11,7 +11,8 @@ export interface ChapterDetail {
 
 export interface BookSummary {
   bookName: string;
-  category?: string;
+  category: string;
+  author: string;
   totalPages: number;
   plannedDays: number;
   startDate: string;
@@ -52,6 +53,20 @@ export interface MonthlyDashboard {
   booksOnTrack: number;
 }
 
+export interface WeeklyChapterEntry {
+  chapterNumber: number;
+  chapterTitle: string;
+  startPage: number;
+  endPage: number;
+  status: ChapterStatus;
+}
+
+export interface WeeklyBookEntry {
+  bookName: string;
+  category: string;
+  chapters: WeeklyChapterEntry[];
+}
+
 export interface WeeklyDashboard {
   weekStartDate: string;
   weekEndDate: string;
@@ -61,6 +76,7 @@ export interface WeeklyDashboard {
   chaptersNotStarted: number;
   totalPlannedPages: number;
   totalCompletedPages: number;
+  books: WeeklyBookEntry[];
 }
 
 export interface DailyBookProgress {
@@ -71,6 +87,8 @@ export interface DailyBookProgress {
   variancePages: number;
   status: BookStatus;
   hasCoverImage: boolean;
+  plannedPageRangeStart: number;
+  plannedPageRangeEnd: number;
 }
 
 export interface CreateBookRequest {

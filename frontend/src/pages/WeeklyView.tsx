@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getWeeklyDashboard } from '../api';
 import { WeeklyDashboard } from '../types';
 import TopBar from '../components/TopBar';
+import StatusBadge from '../components/StatusBadge';
 
 const addDays = (dateStr: string, n: number) => {
   const [y, m, d] = dateStr.split('-').map(Number);
@@ -43,10 +44,6 @@ const WeeklyView: React.FC = () => {
 
   const completionPct = data && data.chaptersPlanned > 0
     ? Math.round((data.chaptersCompleted / data.chaptersPlanned) * 100)
-    : 0;
-
-  const pagesPct = data && data.totalPlannedPages > 0
-    ? Math.round((data.totalCompletedPages / data.totalPlannedPages) * 100)
     : 0;
 
   return (
@@ -102,7 +99,6 @@ const WeeklyView: React.FC = () => {
           <>
             {/* Stats Bento Grid */}
             <section className="grid grid-cols-1 md:grid-cols-12 gap-lg">
-              {/* Main Progress Card */}
               <div className="md:col-span-8 card p-lg flex flex-col justify-between min-h-[200px]">
                 <div className="flex justify-between items-start">
                   <div>
@@ -135,7 +131,6 @@ const WeeklyView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Snapshot Stats */}
               <div className="md:col-span-4 grid grid-rows-2 gap-lg">
                 <div className="card p-lg flex items-center gap-lg">
                   <div className="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center text-primary">
@@ -163,71 +158,66 @@ const WeeklyView: React.FC = () => {
               </div>
             </section>
 
-            {/* Detailed Breakdown */}
-            <section className="grid grid-cols-1 lg:grid-cols-3 gap-xl">
-              <div className="lg:col-span-2 space-y-lg">
-                <h3 className="text-h2 font-semibold">Chapter Breakdown</h3>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-md">
-                  {[
-                    { label: 'PLANNED', value: data.chaptersPlanned, color: 'text-on-surface' },
-                    { label: 'COMPLETED', value: data.chaptersCompleted, color: 'text-primary' },
-                    { label: 'NOT STARTED', value: data.chaptersNotStarted, color: 'text-on-surface-variant' },
-                    { label: 'OVERDUE', value: data.chaptersOverdue, color: 'text-error' },
-                  ].map(stat => (
-                    <div key={stat.label} className="card p-md text-center">
-                      <p className="font-label-caps text-[10px] text-on-surface-variant mb-xs">{stat.label}</p>
-                      <p className={`text-headline-xl font-bold ${stat.color}`}>{stat.value}</p>
-                    </div>
-                  ))}
+            {/* Chapter Breakdown + Pages Progress */}
+            <section className="grid grid-cols-2 md:grid-cols-4 gap-md">
+              {[
+                { label: 'PLANNED', value: data.chaptersPlanned, color: 'text-on-surface' },
+                { label: 'COMPLETED', value: data.chaptersCompleted, color: 'text-primary' },
+                { label: 'NOT STARTED', value: data.chaptersNotStarted, color: 'text-on-surface-variant' },
+                { label: 'OVERDUE', value: data.chaptersOverdue, color: 'text-error' },
+              ].map(stat => (
+                <div key={stat.label} className="card p-md text-center">
+                  <p className="font-label-caps text-[10px] text-on-surface-variant mb-xs">{stat.label}</p>
+                  <p className={`text-headline-xl font-bold ${stat.color}`}>{stat.value}</p>
                 </div>
+              ))}
+            </section>
 
-                {/* Pages Progress */}
-                <div className="card p-lg">
-                  <div className="flex justify-between items-center mb-md">
-                    <h4 className="text-h2 font-semibold">Pages Progress</h4>
-                    <span className="font-label-caps text-label-caps text-primary">{pagesPct}%</span>
-                  </div>
-                  <div className="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-primary rounded-full transition-all duration-700"
-                      style={{ width: `${pagesPct}%` }}
-                    />
-                  </div>
-                  <div className="flex justify-between mt-2 text-body-sm text-on-surface-variant">
-                    <span>{data.totalCompletedPages} completed</span>
-                    <span>{data.totalPlannedPages} planned</span>
-                  </div>
+            {/* This Week's Chapters */}
+            <section className="space-y-lg">
+              <h3 className="text-h2 font-semibold text-on-surface">This Week's Chapters</h3>
+              {data.books.length === 0 ? (
+                <div className="card p-xl text-center">
+                  <p className="text-on-surface-variant">No chapters planned for this week.</p>
                 </div>
-              </div>
-
-              {/* Side summary */}
-              <div className="space-y-lg">
-                <h3 className="text-h2 font-semibold">Week at a Glance</h3>
-                <div className="bg-primary-fixed p-lg rounded-xl text-on-primary-fixed space-y-md">
-                  <div className="flex items-center gap-md">
-                    <span className="material-symbols-outlined">event_note</span>
-                    <div>
-                      <p className="font-label-caps text-label-caps opacity-80">WEEK DATES</p>
-                      <p className="font-semibold">{data.weekStartDate} → {data.weekEndDate}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-md">
-                    <span className="material-symbols-outlined">library_books</span>
-                    <div>
-                      <p className="font-label-caps text-label-caps opacity-80">COMPLETION RATE</p>
-                      <p className="font-semibold">{completionPct}% of chapters done</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-md">
-                    <span className="material-symbols-outlined">import_contacts</span>
-                    <div>
-                      <p className="font-label-caps text-label-caps opacity-80">PAGES COMPLETED</p>
-                      <p className="font-semibold">{data.totalCompletedPages} of {data.totalPlannedPages}</p>
-                    </div>
-                  </div>
+              ) : (
+                <div className="card overflow-hidden">
+                  <table className="w-full text-body-sm border-collapse">
+                    <thead>
+                      <tr className="bg-surface-container-high border-b border-outline-variant">
+                        <th className="px-md py-sm text-left font-label-caps text-label-caps text-on-surface-variant">Book</th>
+                        <th className="px-md py-sm text-left font-label-caps text-label-caps text-on-surface-variant">Chapter</th>
+                        <th className="px-md py-sm text-right font-label-caps text-label-caps text-on-surface-variant">Pages</th>
+                        <th className="px-md py-sm text-center font-label-caps text-label-caps text-on-surface-variant">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.books.map(book => {
+                        return book.chapters.map((ch, i) => (
+                          <tr
+                            key={`${book.bookName}-${ch.chapterNumber}`}
+                            className={`border-b border-outline-variant cursor-pointer transition-colors hover:bg-surface-container-high ${
+                              i === 0 && data.books.indexOf(book) !== 0 ? 'border-t-2 border-t-outline' : ''
+                            }`}
+                            onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
+                          >
+                            <td className="px-md py-sm text-on-surface-variant text-[12px] whitespace-nowrap">
+                              {i === 0 ? book.bookName : ''}
+                            </td>
+                            <td className="px-md py-sm text-on-surface font-medium">{ch.chapterTitle}</td>
+                            <td className="px-md py-sm text-right font-mono text-[12px] text-on-surface-variant whitespace-nowrap">
+                              {ch.startPage}–{ch.endPage}
+                            </td>
+                            <td className="px-md py-sm text-center">
+                              <StatusBadge status={ch.status} />
+                            </td>
+                          </tr>
+                        ));
+                      })}
+                    </tbody>
+                  </table>
                 </div>
-              </div>
+              )}
             </section>
           </>
         ) : (

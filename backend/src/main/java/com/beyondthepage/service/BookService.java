@@ -54,6 +54,7 @@ public class BookService {
 		Book book = new Book(request.getBookName(), request.getTotalPages(),
 				request.getPlannedDays(), request.getStartDate());
 		book.setCategory(request.getCategory());
+		book.setAuthor(request.getAuthor());
 
 		List<ChapterRequest> sortedChapters = request.getChapters()
 				.stream()
@@ -73,6 +74,7 @@ public class BookService {
 		return BookCreatedResponse.builder()
 				.bookName(saved.getBookName())
 				.category(saved.getCategory())
+				.author(saved.getAuthor())
 				.totalPages(saved.getTotalPages())
 				.plannedDays(saved.getPlannedDays())
 				.startDate(saved.getStartDate())
@@ -138,6 +140,7 @@ public class BookService {
 		return BookDetailResponse.builder()
 				.bookName(book.getBookName())
 				.category(book.getCategory())
+				.author(book.getAuthor())
 				.totalPages(book.getTotalPages())
 				.plannedDays(book.getPlannedDays())
 				.startDate(book.getStartDate())
@@ -193,6 +196,7 @@ public class BookService {
 		return BookSummaryResponse.builder()
 				.bookName(book.getBookName())
 				.category(book.getCategory())
+				.author(book.getAuthor())
 				.totalPages(book.getTotalPages())
 				.plannedDays(book.getPlannedDays())
 				.startDate(book.getStartDate())
@@ -229,6 +233,14 @@ public class BookService {
 		}
 		book.setCoverImageType(contentType);
 		bookRepository.save(book);
+	}
+
+	@Transactional
+	public void deleteBook(String bookName) {
+		if (!bookRepository.existsByBookName(bookName)) {
+			throw new BookNotFoundException(bookName);
+		}
+		bookRepository.deleteById(bookName);
 	}
 
 	@Transactional(readOnly = true)

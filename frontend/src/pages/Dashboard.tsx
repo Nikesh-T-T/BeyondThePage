@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDashboardSummary, getBooks, coverUrl } from '../api';
+import { getDashboardSummary, getBooks } from '../api';
 import { DashboardSummary, BookSummary } from '../types';
 import TopBar from '../components/TopBar';
 import StatusBadge from '../components/StatusBadge';
 
 const UNCATEGORIZED = 'Uncategorized';
 
+const fmt = (dateStr: string): string => {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
+
 const Dashboard: React.FC = () => {
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [books, setBooks] = useState<BookSummary[]>([]);
   const [loading, setLoading] = useState(true);
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,23 +35,24 @@ const Dashboard: React.FC = () => {
     );
   }
 
-  const inProgress = books.filter(b => b.currentStatus === 'ON_TRACK' || b.currentStatus === 'AT_RISK');
-  const overdue = books.filter(b => b.currentStatus === 'OVERDUE');
-
   const grouped: Record<string, BookSummary[]> = {};
   for (const book of books) {
     const key = book.category ?? UNCATEGORIZED;
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(book);
   }
-  const categories = Object.keys(grouped).sort((a, b) => {
-    if (a === UNCATEGORIZED) return 1;
-    if (b === UNCATEGORIZED) return -1;
-    return a.localeCompare(b);
-  });
+  for (const cat of Object.keys(grouped)) {
+    grouped[cat].sort((a, b) => a.startDate.localeCompare(b.startDate));
+  }
 
-  const toggleCategory = (cat: string) =>
-    setCollapsed(prev => ({ ...prev, [cat]: !prev[cat] }));
+  type Row = { seq: number; book: BookSummary; showCategory: boolean };
+  const rows: Row[] = [];
+  let seq = 1;
+  for (const cat of Object.keys(grouped)) {
+    grouped[cat].forEach((book, i) => {
+      rows.push({ seq: seq++, book, showCategory: i === 0 });
+    });
+  }
 
   return (
     <div className="min-h-screen">
@@ -55,7 +60,7 @@ const Dashboard: React.FC = () => {
 
       <div className="max-w-container-max mx-auto p-lg space-y-xl">
         {/* Summary Cards */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-lg">
+        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-lg">
           <div className="card p-lg flex flex-col">
             <span className="font-label-caps text-label-caps text-on-surface-variant mb-xs">TOTAL BOOKS</span>
             <div className="flex items-end gap-sm mt-auto">
@@ -87,184 +92,93 @@ const Dashboard: React.FC = () => {
               <span className="material-symbols-outlined text-error mb-1">warning</span>
             </div>
           </div>
+
+          <div className="col-span-2 p-lg rounded-xl bg-primary-fixed text-on-primary-fixed shadow-lg flex items-center gap-lg">
+            <div className="relative flex-shrink-0">
+              <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" strokeOpacity="0.15" strokeWidth="10" />
+                {(summary?.totalBooks ?? 0) > 0 && (
+                  <circle
+                    cx="50" cy="50" fill="transparent" r="44"
+                    stroke="currentColor" strokeWidth="10"
+                    strokeDasharray={`${2 * Math.PI * 44}`}
+                    strokeDashoffset={`${2 * Math.PI * 44 * (1 - (summary!.completedBooks / summary!.totalBooks))}`}
+                    strokeLinecap="round"
+                  />
+                )}
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-sm font-bold leading-none">{summary?.completedBooks ?? 0}/{summary?.totalBooks ?? 0}</span>
+              </div>
+            </div>
+            <div>
+              <span className="font-label-caps text-label-caps opacity-70 block mb-xs">READING STATS</span>
+              <p className="text-headline-lg-mobile font-bold leading-tight">
+                {summary?.completedBooks ?? 0} of {summary?.totalBooks ?? 0}
+              </p>
+              <p className="text-body-sm opacity-70">books completed</p>
+            </div>
+          </div>
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl">
-          {/* Books List */}
-          <section className="lg:col-span-8 space-y-lg">
-            <div className="flex justify-between items-center">
-              <h3 className="text-headline-lg-mobile font-semibold text-on-surface">Current Reading List</h3>
+        {/* Reading Plan Table */}
+        <section className="space-y-lg">
+          <h3 className="text-headline-lg-mobile font-semibold text-on-surface">Reading Plan</h3>
+
+          {books.length === 0 ? (
+            <div className="card p-xl text-center">
+              <span className="material-symbols-outlined text-[48px] text-outline-variant mb-md block">menu_book</span>
+              <p className="text-on-surface-variant text-body-md mb-md">No books yet. Start tracking your reading!</p>
               <button
-                className="text-primary font-label-caps text-label-caps hover:underline"
-                onClick={() => navigate('/books')}
+                onClick={() => navigate('/books/new')}
+                className="px-lg py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity"
               >
-                VIEW ALL
+                Add Your First Book
               </button>
             </div>
-
-            {books.length === 0 ? (
-              <div className="card p-xl text-center">
-                <span className="material-symbols-outlined text-[48px] text-outline-variant mb-md block">menu_book</span>
-                <p className="text-on-surface-variant text-body-md mb-md">No books yet. Start tracking your reading!</p>
-                <button
-                  onClick={() => navigate('/books/new')}
-                  className="px-lg py-sm bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity"
-                >
-                  Add Your First Book
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-lg">
-                {categories.map(cat => (
-                  <div key={cat}>
-                    <button
-                      type="button"
-                      onClick={() => toggleCategory(cat)}
-                      className="flex items-center gap-2 w-full text-left mb-md group"
-                    >
-                      <span
-                        className="material-symbols-outlined text-[18px] text-primary transition-transform duration-200"
-                        style={{ transform: collapsed[cat] ? 'rotate(-90deg)' : 'rotate(0deg)' }}
-                      >
-                        expand_more
-                      </span>
-                      <span className="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary transition-colors">
-                        {cat.toUpperCase()}
-                      </span>
-                      <span className="font-label-caps text-[10px] text-outline-variant ml-1">
-                        ({grouped[cat].length})
-                      </span>
-                    </button>
-
-                    {!collapsed[cat] && (
-                      <div className="space-y-md">
-                        {grouped[cat].map(book => (
-                          <div
-                            key={book.bookName}
-                            className="card p-lg flex flex-col md:flex-row md:items-center gap-lg cursor-pointer"
-                            onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
-                          >
-                            <div className="w-12 h-16 bg-surface-container-high rounded shadow-sm flex-shrink-0 overflow-hidden flex items-center justify-center">
-                              {book.hasCoverImage
-                                ? <img src={coverUrl(book.bookName)} alt={`${book.bookName} cover`} className="w-full h-full object-cover" />
-                                : <span className="material-symbols-outlined text-on-surface-variant">book</span>}
-                            </div>
-                            <div className="flex-grow space-y-xs">
-                              <h4 className="text-[18px] font-semibold leading-tight text-on-surface">{book.bookName}</h4>
-                              <div className="space-y-xs pt-sm">
-                                <div className="flex justify-between font-label-caps text-[10px]">
-                                  <span className="text-on-surface-variant">PROGRESS</span>
-                                  <span className={book.currentStatus === 'OVERDUE' ? 'text-error' : 'text-primary'}>
-                                    {Math.round(book.completionPercentage)}%
-                                  </span>
-                                </div>
-                                <div className="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-                                  <div
-                                    className={`h-full rounded-full transition-all duration-700 ${
-                                      book.currentStatus === 'OVERDUE' ? 'bg-error' : 'bg-primary'
-                                    }`}
-                                    style={{ width: `${book.completionPercentage}%` }}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-end gap-sm min-w-[130px]">
-                              <StatusBadge status={book.currentStatus} />
-                              <span className="font-mono text-[12px] text-on-surface-variant">
-                                {book.completedPages} / {book.totalPages} pgs
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-
-          {/* Side Panel */}
-          <aside className="lg:col-span-4 space-y-xl">
-            {overdue.length > 0 && (
-              <div className="space-y-lg">
-                <h3 className="text-headline-lg-mobile font-semibold text-on-surface flex items-center gap-2">
-                  <span className="material-symbols-outlined text-error">warning</span>
-                  Needs Attention
-                </h3>
-                <div className="space-y-md">
-                  {overdue.map(book => (
-                    <div
+          ) : (
+            <div className="card overflow-hidden">
+              <table className="w-full text-body-sm border-collapse">
+                <thead>
+                  <tr className="bg-surface-container-high border-b border-outline-variant">
+                    <th className="px-md py-sm text-right font-label-caps text-label-caps text-on-surface-variant w-8">#</th>
+                    <th className="px-md py-sm text-left font-label-caps text-label-caps text-on-surface-variant">Category</th>
+                    <th className="px-md py-sm text-left font-label-caps text-label-caps text-on-surface-variant">Book</th>
+                    <th className="px-md py-sm text-right font-label-caps text-label-caps text-on-surface-variant">Pages</th>
+                    <th className="px-md py-sm text-right font-label-caps text-label-caps text-on-surface-variant">Days</th>
+                    <th className="px-md py-sm text-center font-label-caps text-label-caps text-on-surface-variant">Start</th>
+                    <th className="px-md py-sm text-center font-label-caps text-label-caps text-on-surface-variant">End</th>
+                    <th className="px-md py-sm text-center font-label-caps text-label-caps text-on-surface-variant">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map(({ seq: n, book, showCategory }, idx) => (
+                    <tr
                       key={book.bookName}
-                      className="card p-lg border-l-4 border-l-error cursor-pointer"
+                      className={`border-b border-outline-variant cursor-pointer transition-colors hover:bg-surface-container-high ${
+                        showCategory && idx !== 0 ? 'border-t-2 border-t-outline' : ''
+                      }`}
                       onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
                     >
-                      <p className="font-semibold text-on-surface">{book.bookName}</p>
-                      <p className="text-body-sm text-error mt-xs">
-                        {book.daysRemaining === 0
-                          ? 'Past deadline'
-                          : `${book.daysRemaining} days remaining`}
-                        {' · '}{book.remainingPages} pages left
-                      </p>
-                    </div>
+                      <td className="px-md py-sm text-right font-mono text-[11px] text-on-surface-variant">{n}</td>
+                      <td className="px-md py-sm text-on-surface-variant text-[12px] whitespace-nowrap">
+                        {showCategory ? book.category : ''}
+                      </td>
+                      <td className="px-md py-sm text-on-surface font-medium">{book.bookName}</td>
+                      <td className="px-md py-sm text-right font-mono text-[12px] text-on-surface-variant">{book.totalPages}</td>
+                      <td className="px-md py-sm text-right font-mono text-[12px] text-on-surface-variant">{book.plannedDays}</td>
+                      <td className="px-md py-sm text-center font-mono text-[12px] text-on-surface-variant whitespace-nowrap">{fmt(book.startDate)}</td>
+                      <td className="px-md py-sm text-center font-mono text-[12px] text-on-surface-variant whitespace-nowrap">{fmt(book.targetEndDate)}</td>
+                      <td className="px-md py-sm text-center">
+                        <StatusBadge status={book.currentStatus} />
+                      </td>
+                    </tr>
                   ))}
-                </div>
-              </div>
-            )}
-
-            {inProgress.length > 0 && (
-              <div className="space-y-lg">
-                <h3 className="text-headline-lg-mobile font-semibold text-on-surface">Finishing Soon</h3>
-                <div className="card p-lg space-y-md">
-                  {inProgress.slice(0, 2).map(book => (
-                    <div
-                      key={book.bookName}
-                      className="flex items-center gap-md cursor-pointer"
-                      onClick={() => navigate(`/books/${encodeURIComponent(book.bookName)}`)}
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined text-primary">auto_stories</span>
-                      </div>
-                      <div>
-                        <p className="text-body-md font-semibold text-on-surface">{book.bookName}</p>
-                        <p className="text-body-sm text-on-surface-variant">
-                          {book.remainingPages} pages · {book.daysRemaining} days left
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="p-lg rounded-xl bg-primary-fixed text-on-primary-fixed shadow-lg">
-              <h3 className="text-headline-lg-mobile font-semibold mb-sm">Reading Stats</h3>
-              <p className="text-body-sm mb-lg opacity-70">
-                {summary?.completedBooks ?? 0} of {summary?.totalBooks ?? 0} books completed
-              </p>
-              <div className="flex items-center justify-center py-md relative">
-                <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" strokeOpacity="0.15" strokeWidth="8" />
-                  {(summary?.totalBooks ?? 0) > 0 && (
-                    <circle
-                      cx="50" cy="50" fill="transparent" r="44"
-                      stroke="currentColor" strokeWidth="8"
-                      strokeDasharray={`${2 * Math.PI * 44}`}
-                      strokeDashoffset={`${2 * Math.PI * 44 * (1 - (summary!.completedBooks / summary!.totalBooks))}`}
-                      strokeLinecap="round"
-                    />
-                  )}
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-headline-xl font-bold leading-none">
-                    {summary?.completedBooks ?? 0}/{summary?.totalBooks ?? 0}
-                  </span>
-                  <span className="font-label-caps text-[10px]">BOOKS</span>
-                </div>
-              </div>
+                </tbody>
+              </table>
             </div>
-          </aside>
-        </div>
+          )}
+        </section>
       </div>
     </div>
   );

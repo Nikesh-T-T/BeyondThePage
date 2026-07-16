@@ -2,7 +2,6 @@ package com.beyondthepage.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -66,6 +65,8 @@ class BookServiceTest {
 	void shouldCreateBookSuccessfully() {
 		CreateBookRequest request = createBookRequestWithTwoChapters();
 		Book savedBook = createBook(100, 30, START_DATE);
+		savedBook.setCategory("Fiction");
+		savedBook.setAuthor("Test Author");
 		when(bookRepository.existsByBookName("Test Book")).thenReturn(false);
 		when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
 		when(readingProgressRepository.save(any(ReadingProgress.class))).thenReturn(new ReadingProgress(savedBook));
@@ -77,6 +78,8 @@ class BookServiceTest {
 		assertEquals(30, response.getPlannedDays());
 		assertEquals(START_DATE, response.getStartDate());
 		assertEquals(0, response.getCompletedPages());
+		assertEquals("Fiction", response.getCategory());
+		assertEquals("Test Author", response.getAuthor());
 		verify(bookRepository).save(any(Book.class));
 		verify(readingProgressRepository).save(any(ReadingProgress.class));
 	}
@@ -87,6 +90,7 @@ class BookServiceTest {
 		setField(request, "category", "Technology");
 		Book savedBook = createBook(100, 30, START_DATE);
 		savedBook.setCategory("Technology");
+		savedBook.setAuthor("Test Author");
 		when(bookRepository.existsByBookName("Test Book")).thenReturn(false);
 		when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
 		when(readingProgressRepository.save(any(ReadingProgress.class))).thenReturn(new ReadingProgress(savedBook));
@@ -97,16 +101,19 @@ class BookServiceTest {
 	}
 
 	@Test
-	void shouldCreateBookWithoutCategoryWhenCategoryIsNull() {
+	void shouldCreateBookWithAuthorSuccessfully() {
 		CreateBookRequest request = createBookRequestWithTwoChapters();
+		setField(request, "author", "Robert C. Martin");
 		Book savedBook = createBook(100, 30, START_DATE);
+		savedBook.setCategory("Fiction");
+		savedBook.setAuthor("Robert C. Martin");
 		when(bookRepository.existsByBookName("Test Book")).thenReturn(false);
 		when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
 		when(readingProgressRepository.save(any(ReadingProgress.class))).thenReturn(new ReadingProgress(savedBook));
 
 		BookCreatedResponse response = bookService.createBook(request);
 
-		assertNull(response.getCategory());
+		assertEquals("Robert C. Martin", response.getAuthor());
 	}
 	@Test
 	void shouldThrowBookAlreadyExistsExceptionWhenBookNameIsDuplicate() {
@@ -165,6 +172,8 @@ class BookServiceTest {
 	@Test
 	void shouldReturnAllBooksWithDerivedFields() {
 		Book book = createBookWithProgress(200, 20, START_DATE, 40);
+		book.setCategory("Science");
+		book.setAuthor("Test Author");
 		when(bookRepository.findAllWithProgress()).thenReturn(List.of(book));
 		stubProgressCalculations(book, TARGET_END_DATE, 10L, 50L, 100.0, 10.0, BookStatus.ON_TRACK);
 
@@ -172,18 +181,24 @@ class BookServiceTest {
 
 		assertEquals(1, responses.size());
 		assertEquals("Test Book", responses.get(0).getBookName());
+		assertEquals("Science", responses.get(0).getCategory());
+		assertEquals("Test Author", responses.get(0).getAuthor());
 		assertEquals(BookStatus.ON_TRACK, responses.get(0).getCurrentStatus());
 	}
 
 	@Test
 	void shouldReturnBookDetailWithChapterStatuses() {
 		Book book = createBookWithProgressAndChapters(200, 20, START_DATE, 50);
+		book.setCategory("Science");
+		book.setAuthor("Test Author");
 		when(bookRepository.findByBookNameWithDetails("Test Book")).thenReturn(Optional.of(book));
 		stubProgressCalculations(book, TARGET_END_DATE, 10L, 50L, 40.0, 10.0, BookStatus.ON_TRACK);
 
 		BookDetailResponse response = bookService.getBookDetail("Test Book");
 
 		assertEquals("Test Book", response.getBookName());
+		assertEquals("Science", response.getCategory());
+		assertEquals("Test Author", response.getAuthor());
 		assertNotNull(response.getChapters());
 		assertEquals(2, response.getChapters().size());
 	}
@@ -347,6 +362,8 @@ class BookServiceTest {
 		setField(request, "totalPages", 100);
 		setField(request, "plannedDays", 30);
 		setField(request, "startDate", START_DATE);
+		setField(request, "category", "Fiction");
+		setField(request, "author", "Test Author");
 		setField(request, "chapters", chapters);
 		return request;
 	}

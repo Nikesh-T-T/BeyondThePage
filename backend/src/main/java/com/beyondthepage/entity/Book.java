@@ -39,6 +39,9 @@ public class Book {
 	@Column(name = "category", length = 100)
 	private String category;
 
+	@Column(name = "author", length = 255)
+	private String author;
+
 	@Column(name = "cover_image", columnDefinition = "bytea")
 	private byte[] coverImage;
 
